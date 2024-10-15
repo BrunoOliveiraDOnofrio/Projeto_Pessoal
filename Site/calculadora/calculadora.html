@@ -1,48 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculadora</title>
-    <link rel="stylesheet" href="../style/estilo.css">
+    <link rel="stylesheet" href="style/estilo.css" />
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-  />
-</head>
-<body>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="../home/imagem/dumbbell-solid.svg"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
     <section>
-        <div class="container">
-          <div class="menu">
-            <ul>
-              <li><i class="fa-solid fa-house"></i>Home</li>
-              <li><i class="fa-solid fa-calculator"></i>Calculadora</li>
-              <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
-              <li><i class="fa-solid fa-bag-shopping"></i>Produtos</li>
-              <li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li>
-            </ul>
-            <div>
-              <i class="fa-solid fa-user"></i>
+      <div class="container">
+        <div class="menu">
+          <ul>
+            <a href="../home/index.html"
+              ><li><i class="fa-solid fa-house"></i>Home</li></a
+            >
+            <a href="./calculadora.html"
+              ><li><i class="fa-solid fa-calculator"></i>Calculadora</li></a
+            >
+            <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
+            <li><i class="fa-solid fa-bag-shopping"></i>Produtos</li>
+            <li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <div class="principal">
+      <div class="box-slider-banner">
+        <div class="slider">
+          <div class="banner_Calc">
+            <div class="introducao">
+              <div>
+                <h1>
+                  <span class="maior">Calculadora</span>
+                  <hr />
+                </h1>
+                <h2>Quanto de creatina eu preciso?</h2>
+              </div>
+              <div>
+                <img src="imagem/balanca.PNG" alt="" />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div class="principal">
-        <div class="banner_Calc">
-          <div class="introducao">
-            <h1>
-              <span class="maior">Exercício,</span><br />Um dos
-              <span class="cor">pilares</span> da vida
-              <hr />
-            </h1>
-            <div>
-              <button>Cadastre-se</button>
-              <h4><-- Construa seu <span class="cor">pilar</span> ainda hoje</h4>
+          <div class="banner_Calc">
+            <div class="introducao">
+              <div>
+                <h1>
+                  <span class="maior">Calculadora</span>
+                  <hr />
+                </h1>
+                <h2>Qual é meu IMC?</h2>
+              </div>
+              <div>
+                <img src="imagem/imc.PNG" alt="" />
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-</body>
+    <div class="direction">
+      <button id="prev"><i class="fa-solid fa-location-arrow"></i></button>
+      <button id="next"><i class="fa-solid fa-location-arrow"></i></button>
+    </div>
+
+    <div class="exibicao">
+      <div class="box-slider">
+        <div class="slider">
+          <div class="conta">
+            <!-- Cálculo de creatina por dia -->
+            <h5>Escreva seu peso</h5>
+            <input type="number" id="input_peso" />
+            <button onclick="calcular()">Calcular()</button>
+          </div>
+
+          <div class="conta">
+            <!-- Cálculo de IMC -->
+            <h5>Escreva seu peso</h5>
+            <input type="number" id="input_peso" />
+            <h5>Escreva sua altura</h5>
+            <input type="number" id="input_altura" />
+            <button onclick="calcular()">Caclcular()</button>
+          </div>
+
+          <div class="conta">
+            <!-- Treino recomendado -->
+            <h5>Escreva sua idade</h5>
+            <input type="number" id="input_idade" />
+            <h5>Escreva seu peso</h5>
+            <input type="number" id="input_peso" />
+            <h5>Escreva sua altura</h5>
+            <input type="number" id="input_altura" />
+            <h5>Selecione um nível de atividade</h5>
+            <select id="select_nivel">
+              <option value="#">Selecione UM</option>
+              <option value="sedentario">Sedentário</option>
+              <option value="moderado">Moderado</option>
+              <option value="alto">Muito alto</option>
+            </select>
+            <h5>Selecione um objetivo</h5>
+            <select id="select_objetivo">
+              <option value="#">Selecione UM</option>
+              <option value="massa">Ganhar Massa</option>
+              <option value="definir">Definição</option>
+            </select>
+            <button onclick="calcular()">Calcular()</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultado">
+        <div class="div_mensagem"></div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -12,6 +12,7 @@
     position: fixed;
     background-color: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.8);
+    z-index: 5;
 }
 
 .menu {
@@ -21,6 +22,7 @@
     align-items: center;
     width: 80%;
     height: 80px;
+
 }
 
 .menu ul {
@@ -59,7 +61,7 @@
 }
 
 .banner {
-    background-image: url(../home/imagem/Fundo2.jfif);
+    background-image: url(../imagem/Fundo2.jfif);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -112,6 +114,12 @@
     color: white;
 }
 
+.introducao button:hover{
+    box-shadow: none;
+    background-color: rgb(109, 109, 109);
+    transition: 0.3s ease;
+}
+
 h2{
     text-align: center;
     padding: 10px;
@@ -124,6 +132,23 @@ h2{
 
 .estrategias {
     background-color: rgba(0, 0, 0, 0.829);
+    padding: 20px;
+}
+
+.estrategias i {
+    font-size: 100px;
+    transition: 0.6s ease;
+}
+
+.estrategias i:hover{
+    transform: rotate(360deg);
+    transition: 0.6s ease;
+    color: #c300ff;
+}
+
+.estrategias h5 {
+    font-weight: 800;
+    font-size: 20px;
 }
 
 .boxes{
@@ -152,20 +177,17 @@ h2{
     transition: transform 0.3s ease;
 }
 
-.estrategias i {
-    font-size: 100px;
-    transition: 0.5s ease;
+.box h5 {
+    border-bottom: 2px solid black;
 }
 
-.estrategias i:hover{
-    transform: rotate(360deg);
-    transition: 0.5s ease;
-    color: #c300ff;
-}
-
-.estrategias h5 {
-    font-weight: 800;
-    font-size: 20px;
+.box p {
+    padding: 5px;
+    text-align: center;
+    border-radius: 12px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.555) inset;
 }
 
 .box:hover{
@@ -173,25 +195,11 @@ h2{
     transition: 0.3s ease;
 }
 
-.introducao button:hover{
-    box-shadow: none;
-    background-color: rgb(109, 109, 109);
-    transition: 0.3s ease;
-}
-
-.banner_Calc {
-    background-image: url(../calculadora/imagem/banner_Calc.PNG);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-}
-
 .caixa {
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.829);
-    perspective: 1000px;
     padding: 20px;
 }
 
@@ -234,7 +242,8 @@ h2{
 }
 
 .imagem div img {
-    width: 200px;
+    width: 300px;
+    height: 300px;
     margin: auto;
 }
 
@@ -272,7 +281,7 @@ h2{
     color: white;
     background-color: black;
     border: none;
-    border-radius: 12px;
+    border-radius: 50%;
     cursor: pointer;
     transition: 0.6s ease;
 }
@@ -289,3 +298,82 @@ h2{
 #next {
     transform: rotate(40deg);
 }
+
+.filosofos {
+    background-color: rgba(0, 0, 0, 0.829);
+    
+}
+
+.container-filosofo {
+    display: flex;
+    padding: 40px;
+    width: 90%;
+    margin: auto;
+    justify-content: space-around;
+
+}
+
+.caixa-filosofo {
+    border-radius: 12px;
+    width: 300px;
+    height: 400px;
+    background-color: #d8d8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    box-shadow: 0px 5px 15px black;
+    transition: 0.6s ease;
+
+}
+
+.caixa-filosofo h3 {
+    border-bottom: solid 2px #1f1f1f;
+    font-size: 30px;
+}
+
+.caixa-filosofo h4 {
+    padding: 5px;
+    color: #ffffff;
+    text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.575);
+    background-color: #ccc;
+    border-radius: 12px;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.555) inset;
+}
+
+.caixa-filosofo img {
+    width: 200px;
+    height: 150px;
+    border-radius: 12px;
+}
+
+.caixa-filosofo:hover {
+    transform: scale(1.1);
+    transition: 0.6s ease;
+}
+
+.footer{
+    background-color: #00000081;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    color: #ccc;
+    align-items: center;
+}
+
+.footer div {
+    display: flex;
+    align-items: center;
+}
+
+.footer div img {
+    width: 50px;
+}
+
+/* FIM ESTILO HOME*/
+/* FIM ESTILO HOME*/
+/* FIM ESTILO HOME*/
+

@@ -1,0 +1,254 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
+.container {
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 5;
+}
+
+.menu {
+    display: flex;
+    margin: auto;
+    justify-content: end;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+
+}
+
+.menu ul li {
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.menu ul li i {
+    margin-right: 10px;
+    transition: 0.3s ease;
+}
+
+.menu ul li:hover{
+    color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+    color: #c300ff;
+}
+
+.menu div:hover{
+    background-color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+}
+
+.principal{
+    display: flex;
+    flex-direction: column;
+}
+
+.banner_Calc {
+    background-image: url(../imagem/banner_Calc.PNG);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.introducao{
+    height: 100vh;
+    display: flex;
+    color: white;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-items: center;
+}
+
+.introducao div {
+    display: flex;
+    flex-direction: column;
+}
+
+.introducao h1 .maior {
+    font-weight: 800;
+    font-size: 70px;
+}
+
+.introducao .cor {
+    color: rgb(177, 169, 169);
+}
+
+.introducao h1 hr{
+    color: rgb(177, 169, 169);
+    padding: 2px;
+    background-color: rgb(177, 169, 169);
+    width: 65%;
+    border: none;
+}
+
+.introducao div{
+    display: flex;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.introducao div img {
+    height: 500px;
+    width: 500px;
+}
+
+.introducao button{
+    padding: 10px;
+    border: none;
+    background-color: rgb(48, 46, 46);
+    box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: white;
+}
+
+.introducao button:hover{
+    box-shadow: none;
+    background-color: rgb(109, 109, 109);
+    transition: 0.3s ease;
+}
+
+h2{
+    padding: 10px;
+    background-color: rgb(34, 32, 32);
+    cursor: default;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+.principal {
+    display: flex;
+    justify-content: space-around;
+}
+
+.box-slider-banner {
+    max-height: 100vh;
+    overflow: auto;
+    scroll-behavior: smooth;
+    transition:  0.5s ease;
+}
+
+.box-slider-banner .slider {
+    display: flex;
+    flex-direction: column;
+}
+
+.direction {
+    background-color: #1f1f1f;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 30px;
+}
+
+.direction button {
+    padding: 10px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.6s ease;
+}
+
+.direction button:hover {
+    color: #c300ff;
+    transition: 0.6s ease;
+}
+
+#prev {
+    transform: rotate(220deg);
+}
+
+#next {
+    transform: rotate(40deg);
+}
+
+.exibicao {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    background-color: #1f1f1f;
+}
+
+.box-slider {
+    width: 800px;
+    max-width: 200px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    transition:  0.5s ease;
+    border-radius: 20px;
+}
+
+.slider {
+    display: flex;
+    transition: 0.6s ease-in-out;
+}
+
+.conta {
+    background-color: rgba(0, 0, 0, 0.438);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 800px;
+    box-shadow: 0px 5px 15px black;
+}
+
+.conta h5 {
+    font-size: 20px;
+    box-shadow: 0px 5px 15px black inset;
+    color: white;
+}
+
+.conta input {
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px black inset;
+}
+
+.conta button {
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px black inset;
+}
+
+.conta select {
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px black inset;
+}
+
+.resultado {
+    background-color: rgba(0, 0, 0, 0.438);
+    width: 500px;
+}
