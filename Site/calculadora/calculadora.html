@@ -15,6 +15,8 @@
       href="../home/imagem/dumbbell-solid.svg"
       type="image/x-icon"
     />
+
+    <script src="slider.js" defer></script>
   </head>
   <body>
     <section>
@@ -35,7 +37,7 @@
       </div>
     </section>
     <div class="principal">
-      <div class="box-slider-banner">
+      <div class="box-slider-banner" id="formList-img">
         <div class="slider">
           <div class="banner_Calc">
             <div class="introducao">
@@ -44,13 +46,14 @@
                   <span class="maior">Calculadora</span>
                   <hr />
                 </h1>
-                <h2>Quanto de creatina eu preciso?</h2>
+                <h2>Quanto De Creatina Eu Preciso?</h2>
               </div>
               <div>
                 <img src="imagem/balanca.PNG" alt="" />
               </div>
             </div>
           </div>
+
           <div class="banner_Calc">
             <div class="introducao">
               <div>
@@ -58,10 +61,25 @@
                   <span class="maior">Calculadora</span>
                   <hr />
                 </h1>
-                <h2>Qual é meu IMC?</h2>
+                <h2>Qual É Meu IMC?</h2>
               </div>
               <div>
                 <img src="imagem/imc.PNG" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="banner_Calc">
+            <div class="introducao">
+              <div>
+                <h1>
+                  <span class="maior">Calculadora</span>
+                  <hr />
+                </h1>
+                <h2>Ver Treino Recomendado</h2>
+              </div>
+              <div>
+                <img src="imagem/planilia.PNG" alt="" />
               </div>
             </div>
           </div>
@@ -75,22 +93,22 @@
     </div>
 
     <div class="exibicao">
-      <div class="box-slider">
+      <div class="box-slider" id="formList-calculadora">
         <div class="slider">
           <div class="conta">
             <!-- Cálculo de creatina por dia -->
             <h5>Escreva seu peso</h5>
-            <input type="number" id="input_peso" />
-            <button onclick="calcular()">Calcular()</button>
+            <input type="number" id="input_peso_creatina" />
+            <button onclick="calcular('Creatina')">Calcular()</button>
           </div>
 
           <div class="conta">
             <!-- Cálculo de IMC -->
             <h5>Escreva seu peso</h5>
-            <input type="number" id="input_peso" />
+            <input type="number" id="input_peso_IMC" />
             <h5>Escreva sua altura</h5>
-            <input type="number" id="input_altura" />
-            <button onclick="calcular()">Caclcular()</button>
+            <input type="number" id="input_altura_IMC" />
+            <button onclick="calcular('IMC')">Caclcular()</button>
           </div>
 
           <div class="conta">
@@ -108,20 +126,177 @@
               <option value="moderado">Moderado</option>
               <option value="alto">Muito alto</option>
             </select>
+            <h5>Escolha um sexo</h5>
+            <select id="select_sexo">
+              <option value="#">Selecione UM</option>
+              <option value="homem">Homem</option>
+              <option value="mulher">Mulher</option>
+            </select>
             <h5>Selecione um objetivo</h5>
             <select id="select_objetivo">
               <option value="#">Selecione UM</option>
               <option value="massa">Ganhar Massa</option>
               <option value="definir">Definição</option>
             </select>
-            <button onclick="calcular()">Calcular()</button>
+            <button onclick="calcular('Treino')">Calcular()</button>
           </div>
         </div>
       </div>
 
       <div class="resultado">
-        <div class="div_mensagem"></div>
+        
+        <div id="div_mensagem"></div>
+
+      </div>
+
+      
+    </div>
+
+    <div class="footer">
+      <h5>© Todos os Direitos Reservados - 2024</h5>
+      <div>
+      <h5>Desenvolvido por: Aluno SPTech (Bruno Oliveira D'Onofrio)</h5>
+      <img src="imagem/sptech.PNG" alt="">
       </div>
     </div>
+
   </body>
 </html>
+
+<script>
+
+  function calcular(form) {
+
+    if(form === 'Creatina'){
+      var peso =  Number(input_peso_creatina.value);
+
+      var creatinaDia = peso * 0.03;
+
+      creatinaDia = creatinaDia.toFixed(1);
+
+      var mensagem = `Lembrando que creatina se toma todos os dias,
+      e deve ser consumidia até em dias de descanso, o recomendado
+      para você consumir creatina é de ${creatinaDia} Gramas diárias.`;
+
+      div_mensagem.innerHTML = `<div class="msg">${mensagem}</div>`;
+    }
+
+    if(form === 'IMC'){
+      var peso = Number(input_peso_IMC.value);
+
+      var altura = Number(input_altura_IMC.value);
+
+      var IMC = peso / (altura*altura);
+
+      IMC = IMC.toFixed(1);
+
+      var mensagem = ``;
+
+      if(IMC < 16){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Magreza Grave`;
+      }else if(IMC < 16.9){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Magreza Moderada`;
+      }else if(IMC < 18.5){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Magreza Leve`;
+      }else if(IMC < 24.9){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Peso Ideal`;
+      }else if(IMC < 29.9){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Sobrepeso`;
+      }else if(IMC < 34.9){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considedrado Obesidade Grau I`;
+      }else if(IMC < 39.9){
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Obesidade Grau II ou Severa`;
+      }else{
+        mensagem = `Seu IMC é de ${IMC}, esse número é considerado Obesidade Grau III ou Mórbida`;
+      }
+
+      div_mensagem.innerHTML = `<div class="msg">${mensagem}</div>`;
+    }
+
+    if(form === 'Treino'){
+      var idade = Number(input_idade.value);
+
+      var peso = Number(input_peso.value);
+
+      var altura = Number(input_altura.value);
+
+      var select_lvl = document.getElementById("select_nivel");
+      var nivel = select_lvl.value;
+
+      var select_sexo = document.getElementById("select_sexo");
+      var sexo = select_sexo.value;
+
+      var select_objetivo = document.getElementById("select_objetivo");
+      var obj = select_objetivo.value;
+
+      var mensagem = ``;
+      var treino = ``;
+
+      var caloriaDiaria = 0;
+      var proteina = 0;
+      var carboidrato = 0;
+      var gordura = 0;
+      if(sexo === 'homem'){
+        caloriaDiaria = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * idade);
+        if(nivel === 'sedentario'){
+          caloriaDiaria = caloriaDiaria * 1.2;
+        }else if(nivel === 'moderado'){
+          caloriaDiaria = caloriaDiaria * 1.55;
+        }else if(nivel === 'alto'){
+          caloriaDiaria = caloriaDiaria * 1.725;
+        }
+
+        if(obj === 'massa'){
+          caloriaDiaria = caloriaDiaria + 300;
+          proteina = 2 * peso;
+          carboidrato = 5 * peso;
+          gordura = 0.9 * peso;
+
+          treino += `Treinamento com pesos (4-6 vezes por semana), 6-12 repetições por série.`;
+        }else if(obj === 'definir'){
+          caloriaDiaria = caloriaDiaria - 300;
+          proteina = 2.2 * peso;
+          carboidrato = 3 * peso;
+          gordura = 0.8 * peso;
+
+          treino += `Treinamento com pesos (4-5 vezes por semana), 8-15 repetições por série, combinado com 3-4 sessões de cardio.`;
+        }
+      }else if(sexo === 'mulher'){
+        caloriaDiaria = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * idade);
+
+        if(nivel === 'sedentario'){
+          caloriaDiaria = caloriaDiaria * 1.2;
+        }else if(nivel === 'moderado'){
+          caloriaDiaria = caloriaDiaria * 1.55;
+        }else if(nivel === 'alto'){
+          caloriaDiaria = caloriaDiaria * 1.725;
+        }
+
+        if(obj === 'massa'){
+          caloriaDiaria = caloriaDiaria + 300;
+          proteina = 2 * peso;
+          carboidrato = 5 * peso;
+          gordura = 0.9 * peso;
+
+          treino += `Treinamento com pesos (4-6 vezes por semana), 6-12 repetições por série.`;
+        }else if (obj === 'definir'){
+          caloriaDiaria = caloriaDiaria - 300;
+          proteina = 2.2 * peso;
+          carrboidrato = 3 * peso;
+          gordura = 0.8 * peso;
+
+          treino += `Treinamento com pesos (4-5 vezes por semana), 8-15 repetições por série, combinado com 3-4 sessões de cardio.`;
+        }
+      }
+      caloriaDiaria = caloriaDiaria.toFixed(1);
+      mensagem += `Precisará de: <br> Calorias Diárias : ${caloriaDiaria}<br>
+      Proteínas : ${proteina} Diárias<br>
+      Carboidrato : ${carboidrato} Diárias<br>
+      Gordura : ${gordura} Diárias<br>
+      Sugestão de Treino : ${treino}`
+
+      div_mensagem.innerHTML = `<div class="msg">${mensagem}</div>`;
+    }
+  }
+
+</script>

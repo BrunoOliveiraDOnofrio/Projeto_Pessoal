@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style/estilo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="../home/imagem/dumbbell-solid.svg"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="menu">
+          <ul>
+            <a href="../home/index.html"
+              ><li><i class="fa-solid fa-house"></i>Home</li></a
+            >
+            <a href="./calculadora.html"
+              ><li><i class="fa-solid fa-calculator"></i>Calculadora</li></a
+            >
+            <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
+            <li><i class="fa-solid fa-bag-shopping"></i>Produtos</li>
+            <li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="box">
+      <div class="left">
+        <div class="box-left">
+        <div class="slogan">
+          <h3>Construa Seu Pilar HOJE!</h3>
+          <img src="./imagem/caveira.PNG" alt="" />
+        </div>
+
+        <div class="footer">
+          <div>
+            <h5>© Todos os Direitos Reservados - 2024</h5>
+          </div>
+          <div>
+            <h5>Desenvolvido por: Aluno SPTech (Bruno Oliveira D'Onofrio)</h5>
+            <img src="./imagem/sptech.PNG" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="right">
+        <div class="box-right">
+          <div class="tudo">
+            <div class="option">
+              <h2>SIGN UP</h2>
+              <h2>SIGN IN</h2>
+            </div>
+            <form action="#" method="post">
+              <h5>Nome</h5>
+              <input type="text" id="input_nome" required/>
+              <h5>E-mail</h5>
+              <input type="text" id="input_email" required/>
+              <h5>Senha</h5>
+              <input type="password" id="input_senha" required/>
+              <h5>Por que começou a treinar?</h5>
+              <select id="select_motivo">
+                <option value="#">Selecione UM</option>
+                <option value="sauded">Saúde</option>
+                <option value="estetica">Estética</option>
+                <option value="emocao">Problema Emocional</option>
+                <option value="hobbie">Passa tempo</option>
+                <option value="site">Meu site >:)</option>
+              </select>
+              <h5>Sexo</h5>
+              <select id="select_sexo">
+                <option value="#">Selecione UM</option>
+                <option value="homem">Homem</option>
+                <option value="mulher">Mulher</option>
+              </select>
+
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
