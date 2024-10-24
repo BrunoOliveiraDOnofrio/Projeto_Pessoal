@@ -64,7 +64,7 @@ body {
     justify-content: space-around;
     height: calc(100vh - 80px);
     align-items: center;
-    width: 1300px;
+    width: 95%;
     margin: auto;
 }
 
@@ -133,10 +133,36 @@ body {
 
 .right .option {
     display: flex;
-    gap: 100px;
+    gap: 30px;
     background-color: #d667f8;
     padding: 10px;
     border-radius: 20px 20px 0px 0px;
+    transition: 0.6s ease;
+}
+
+.right .option,.cadastro,.login {
+    transition: 0.6s ease;
+}
+
+.right .option .cadastro:hover , .login:hover {
+    color: black;
+    transition: 0.6s ease;
+}
+
+.option div {
+    cursor: pointer;
+}
+
+.option div hr {
+    border: solid 1px black;
+}
+
+#ativo1 {
+    display: block;
+}
+
+#ativo2 {
+    display: none;
 }
 
 .box-right {
@@ -154,8 +180,28 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     background-color: #d667f8;
     border-radius: 20px 20px 20px 20px;
+}
+
+#form_cadastro, #form_login {
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    transition: opacity 0.5s ease, max-height 0.5s ease, visibility 0.5s ease;
+    overflow: hidden;
+}
+
+#form_cadastro.active {
+    opacity: 1;
+    visibility: visible;
+    max-height: 400px;
+}
+#form_login.active {
+    opacity: 1;
+    visibility: visible;
+    max-height: 200px;
 }
 
 form {
@@ -197,4 +243,10 @@ form h5:hover {
     color: black;
     transition: 0.6s ease;
     cursor: default;
+}
+
+@media (min-width: 1370px) {
+    .box {
+        width: 1300px;
+    }
 }

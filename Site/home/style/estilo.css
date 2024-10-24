@@ -76,6 +76,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    cursor: default;
 }
 
 .introducao h1 .maior {
@@ -173,7 +174,6 @@ h2{
     padding: 20px;
     border: none;
     border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
 
@@ -187,7 +187,8 @@ h2{
     border-radius: 12px;
     width: 90%;
     margin: 0 auto;
-    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.555) inset;
+    background-color: #c300ff73;
+    box-shadow: 1px 1px 115px #000000 inset;
 }
 
 .box:hover{
@@ -238,7 +239,7 @@ h2{
     width: 540px;
     color: white;
     background-color: rgb(34, 32, 32);
-    box-shadow: 1px 1px 11115px black;
+    box-shadow: 10px 10px 1115px #c300ff28 inset;
 }
 
 .imagem div img {
@@ -249,6 +250,7 @@ h2{
 
 .texto {
     display: flex;
+    cursor: default;
 }
 
 .texto div{
@@ -323,9 +325,8 @@ h2{
     align-items: center;
     justify-content: space-around;
     text-align: center;
-    box-shadow: 0px 5px 15px black;
     transition: 0.6s ease;
-
+    cursor: default;
 }
 
 .caixa-filosofo h3 {
@@ -341,7 +342,8 @@ h2{
     border-radius: 12px;
     width: 80%;
     margin: 0 auto;
-    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.555) inset;
+    background-color: black;
+    box-shadow: 1px 1px 115px #c300ff60 inset;
 }
 
 .caixa-filosofo img {
@@ -362,6 +364,7 @@ h2{
     padding: 20px;
     color: #ccc;
     align-items: center;
+    cursor: default;
 }
 
 .footer div {

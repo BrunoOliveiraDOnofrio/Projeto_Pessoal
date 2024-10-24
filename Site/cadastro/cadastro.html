@@ -24,12 +24,12 @@
             <a href="../home/index.html"
               ><li><i class="fa-solid fa-house"></i>Home</li></a
             >
-            <a href="./calculadora.html"
+            <a href="../calculadora/calculadora.html"
               ><li><i class="fa-solid fa-calculator"></i>Calculadora</li></a
             >
             <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
             <li><i class="fa-solid fa-bag-shopping"></i>Produtos</li>
-            <li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li>
+            <a href="./calculadora.html"><li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li></a>
           </ul>
         </div>
       </div>
@@ -59,12 +59,18 @@
         <div class="box-right">
           <div class="tudo">
             <div class="option">
-              <h2>SIGN UP</h2>
-              <h2>SIGN IN</h2>
+              <div class="cadastro">
+              <h2 onclick="mudar('cadastro')">CADASTRE-SE</h2>
+              <hr id="ativo1">
             </div>
-            <form action="#" method="post">
+            <div class="login">
+              <h2 onclick="mudar('login')">LOGAR</h2>
+              <hr id="ativo2">
+            </div>
+            </div>
+            <form action="#" method="post" id="form_cadastro" class="active">
               <h5>Nome</h5>
-              <input type="text" id="input_nome" required/>
+              <input type="email" id="input_nome" required/>
               <h5>E-mail</h5>
               <input type="text" id="input_email" required/>
               <h5>Senha</h5>
@@ -87,9 +93,42 @@
 
               <button type="submit">Submit</button>
             </form>
+
+            <form action="#" method="post" id="form_login">
+
+              <h5>E-mail</h5>
+              <input type="text" id="input_email" required/>
+              <h5>Senha</h5>
+              <input type="password" id="input_senha" required/>
+
+              <button type="submit">Submit</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+<script>
+
+  function mudar(form) {
+
+    var formCadastro = document.getElementById('form_cadastro');
+    var formLogin = document.getElementById('form_login');
+      if (form === "cadastro") {
+          ativo1.style.display = "block";
+          ativo2.style.display = "none";
+          formCadastro.classList.add("active");
+          formLogin.classList.remove("active");
+      }
+
+      if (form === "login") {
+          ativo2.style.display = "block";
+          ativo1.style.display = "none";
+          formLogin.classList.add("active");
+          formCadastro.classList.remove("active");
+      }
+  }
+
+</script>

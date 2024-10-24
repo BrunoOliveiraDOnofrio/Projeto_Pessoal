@@ -31,7 +31,7 @@
             >
             <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
             <li><i class="fa-solid fa-bag-shopping"></i>Produtos</li>
-            <li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li>
+            <a href="../cadastro/cadastro.html"><li><i class="fa-solid fa-right-to-bracket"></i>Cadastre-se</li></a>
           </ul>
         </div>
       </div>
@@ -289,10 +289,10 @@
         }
       }
       caloriaDiaria = caloriaDiaria.toFixed(1);
-      mensagem += `Precisará de: <br> Calorias Diárias : ${caloriaDiaria}<br>
-      Proteínas : ${proteina} Diárias<br>
-      Carboidrato : ${carboidrato} Diárias<br>
-      Gordura : ${gordura} Diárias<br>
+      mensagem += `Precisará de: <br> Calorias Diárias : ${caloriaDiaria} G<br>
+      Proteínas : ${proteina} G Diárias<br>
+      Carboidrato : ${carboidrato} G Diárias<br>
+      Gordura : ${gordura} G Diárias<br>
       Sugestão de Treino : ${treino}`
 
       div_mensagem.innerHTML = `<div class="msg">${mensagem}</div>`;
