@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
+.container {
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 5;
+}
+
+.menu {
+    display: flex;
+    margin: auto;
+    justify-content: end;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+
+}
+
+.menu ul li {
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.menu ul li i {
+    margin-right: 10px;
+    transition: 0.3s ease;
+}
+
+.menu ul li:hover{
+    color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+    color: #c300ff;
+}
+
+.menu div:hover{
+    background-color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+}
+
+.banner {
+    background-image: url(../imagem/banner_produto.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.texto{
+    height: 100vh;
+    display: flex;
+    color: white;
+    width: 80%;
+    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    cursor: default;
+}
+
+.texto h1 {
+    text-align: center;
+}
+
+.titulo {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(34, 32, 32);
+    cursor: default;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.categoria {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    background-color: #a200ff;
+    padding: 20px;
+    height: 500px;
+}
+
+.categoria img {
+    width: 200px;
+    height: 200px;
+}
+
+.categoria div h3 {
+    font-weight: 800;
+    font-size: 25px;
+}
+
+#creatina.escondido , #whey.escondido , #hiper.escondido , #glutamina.escondido , #garrafa.escondido{
+    max-height: 200px;
+    opacity: 1;
+    visibility: visible;
+    align-items: center;
+    margin: auto;
+}
+
+#creatina , #whey , #hiper , #glutamina , #garrafa{
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    transition: opacity 0.5s ease, max-height 0.5s ease, visibility 0.5s ease;
+    overflow: hidden;
+    border-radius: 0 0 12px 12px;
+}
+
+#creatina h2 , #whey h2 , #hiper h2 , #glutamina h2 , #garrafa h2{
+    background-color: rgb(34, 32, 32);
+    cursor: default;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+#creatina div , #whey div , #hiper div , #glutamina div , #garrafa div{
+    border-radius: 0 0 12px 12px;
+    margin: 0 auto;
+    background-color: rgb(80, 75, 75);
+
+}
+
+#creatina div h4 , #whey div h4 , #hiper div h4 , #glutamina div h4 , #garrafa div h4{
+    padding: 5px;
+    text-align: start;
+    color: white;
+    width: 250px;
+    height: 45px;
+}

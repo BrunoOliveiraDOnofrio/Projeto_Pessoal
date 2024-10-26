@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academia - Produtos</title>
+    <link rel="stylesheet" href="style/estilo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="imagem/dumbbell-solid.svg"
+      type="image/x-icon"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+      defer
+    ></script>
+
+    <script src="slider.js" defer></script>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="menu">
+          <ul>
+            <a href="./index.html"
+              ><li><i class="fa-solid fa-house"></i>Home</li></a
+            >
+            <a href="../calculadora/calculadora.html"
+              ><li><i class="fa-solid fa-calculator"></i>Calculadora</li></a
+            >
+            <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
+            <li><i class="fa-solid fa-bag-shopping"></i>Produtos</li>
+            <a href="../cadastro/cadastro.html"
+              ><li>
+                <i class="fa-solid fa-right-to-bracket"></i>Cadastre-se
+              </li></a
+            >
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="box">
+      <div class="banner">
+        <div class="texto">
+          <h1>
+            Nesta página você encontrará os melhores produtos para te acompanhar
+            nos treinos!
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="titulo">
+      <h2>Produtos para acompanhamento</h2>
+    </div>
+
+    <div class="categoria">
+      <div>
+        <img src="imagem/creatina.PNG"alt=""onmouseenter="aparecer('creatina')" onmouseleave="sumir('creatina')"/>
+        <h3>Creatina</h3>
+        <div id="creatina">
+          <h2>Benefícios</h2>
+          <div>
+            <h4>1.Aumento da massa muscular</h4>
+            <hr>
+            <h4>2.Prevenção de doenças crônicas</h4>
+            <hr>
+            <h4>3.Favorecimento da atividade cerebral</h4>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="imagem/whey.PNG" alt="" onmouseenter="aparecer('whey')" onmouseleave="sumir('whey')"/>
+        <h3>Whey Protein</h3>
+        <div id="whey">
+          <h2>Benefícios</h2>
+          <div>
+            <h4>1.Redução de gordura corporal</h4>
+            <hr>
+            <h4>2.Combate à desnutrição</h4>
+            <hr>
+            <h4>3.Fortalece o sistema imunológico</h4>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="imagem/hiper.PNG" alt="" onmouseenter="aparecer('hiper')" onmouseleave="sumir('hiper')"/>
+        <h3>Hipercalórico</h3>
+        <div id="hiper">
+          <h2>Benefícios</h2>
+          <div>
+            <h4>1.Alta concentração de energia</h4>
+            <hr>
+            <h4>2.Otimiza tempo de uma refeição</h4>
+            <hr>
+            <h4>3.Ajuda a atingir as calorias diárias</h4>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="imagem/glutamina.PNG" alt="" onmouseenter="aparecer('glutamina')" onmouseleave="sumir('glutamina')"/>
+        <h3>Glutamina</h3>
+        <div id="glutamina">
+          <h2>Benefícios</h2>
+          <div>
+            <h4>1.Ajuda na absorção de nutrientes</h4>
+            <hr>
+            <h4>2.Auxilia no emagrecimento</h4>
+            <hr>
+            <h4>3.Melhora do humor e da memória</h4>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="imagem/garrafa.PNG" alt="" onmouseenter="aparecer('garrafa')" onmouseleave="sumir('garrafa')"/>
+        <h3>Garrafa 2L</h3>
+        <div id="garrafa">
+          <h2>Benefícios</h2>
+          <div>
+            <h4>1.Otimização de tempo</h4>
+            <hr>
+            <h4>2.Bater metas diárias</h4>
+            <hr>
+            <h4>3.Transporte de nutrientes para o músculo</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="titulo">
+      <h2>Outros</h2>
+    </div>
+
+    <div class="yopro">
+      
+
+    </div>
+
+
+  </body>
+</html>
+
+<script>
+  function aparecer(form) {
+    var creatina = document.getElementById("creatina");
+    var whey = document.getElementById("whey");
+    var hiper = document.getElementById("hiper");
+    var glutamina = document.getElementById("glutamina");
+    var garrafa = document.getElementById("garrafa");
+    if (form === "creatina") {
+      creatina.classList.add("escondido");
+    }
+
+    if(form === 'whey'){
+      whey.classList.add("escondido");
+    }
+
+    if(form === 'hiper'){
+      hiper.classList.add("escondido");
+    }
+
+    if(form === 'glutamina'){
+      glutamina.classList.add("escondido");
+    }
+
+    if(form === 'garrafa'){
+      garrafa.classList.add("escondido");
+    }
+  }
+
+  function sumir(form){
+    var creatina = document.getElementById("creatina");
+    var whey = document.getElementById("whey");
+    var hiper = document.getElementById("hiper");
+    var glutamina = document.getElementById("glutamina");
+    var garrafa = document.getElementById("garrafa");
+    if (form === "creatina") {
+      creatina.classList.remove("escondido");
+    }
+
+    if(form === 'whey'){
+      whey.classList.remove("escondido");
+    }
+
+    if(form === 'hiper'){
+      hiper.classList.remove("escondido");
+    }
+
+    if(form === 'glutamina'){
+      glutamina.classList.remove("escondido");
+    }
+
+    if(form === 'garrafa'){
+      garrafa.classList.remove("escondido");
+    }
+  }
+</script>
