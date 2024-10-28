@@ -171,7 +171,7 @@ h2{
     justify-content: center;
     padding: 20px;
     gap: 30px;
-    box-shadow: 0px 5px 15px #c300ff;
+    box-shadow: 0px 5px 15px #a200ff;
 }
 
 .direction button {
@@ -185,7 +185,7 @@ h2{
 }
 
 .direction button:hover {
-    color: #c300ff;
+    color: #a200ff;
     transition: 0.6s ease;
 }
 
@@ -211,7 +211,7 @@ h2{
     scroll-behavior: smooth;
     transition:  0.5s ease;
     border-radius: 20px;
-    box-shadow: 0px 5px 15px #c300ff49;
+    box-shadow: 0px 5px 15px #a200ff;
 }
 
 .box-slider::-webkit-scrollbar{
@@ -271,7 +271,7 @@ h2{
     align-items: center;
     padding: 50px;
     border-radius: 20px;
-    box-shadow: 0px 5px 15px #c300ff49;
+    box-shadow: 0px 5px 15px #a200ff;
 }
 
 #div_mensagem {
@@ -289,7 +289,7 @@ h2{
     color: #ffffff;
     padding: 10px;
     text-shadow: 5px 1px 10px black;
-    box-shadow: 10px 10px 1115px #c300ffb6 inset;
+    box-shadow: 10px 10px 1115px #a200ff inset;
     border-radius: 20px;
 }
 
