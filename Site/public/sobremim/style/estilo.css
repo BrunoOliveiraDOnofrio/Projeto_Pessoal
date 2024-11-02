@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    list-style: none;
+}
+
+.container {
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 5;
+}
+
+.menu {
+    display: flex;
+    margin: auto;
+    justify-content: end;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+
+}
+
+.menu ul li {
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.menu ul li i {
+    margin-right: 10px;
+    transition: 0.3s ease;
+}
+
+.menu ul li:hover{
+    color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+    color: #c300ff;
+}
+
+.menu div:hover{
+    background-color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+}
+
+
+.banner {
+    background-image: url(../imagem/fundo_roxo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.texto{
+    height: 100vh;
+    display: flex;
+    color: rgb(255, 255, 255);
+
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    cursor: default;
+}
+
+.texto h1 {
+    text-align: center;
+}
+
+.texto h2 {
+    color: gray;
+}
+
+.texto div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titulo {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(34, 32, 32);
+    cursor: default;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.about {
+    cursor: default;
+    background-color: rgba(0, 0, 0, 0.829);
+}
+
+.discucao {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.discucao div {
+    display: flex;
+    align-items: center;
+    background-color: #1f1f1f;
+    text-align: center;
+    color: white;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+span {
+    color: #c300ff;
+}
