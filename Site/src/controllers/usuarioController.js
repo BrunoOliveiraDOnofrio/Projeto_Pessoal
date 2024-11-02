@@ -1,8 +1,8 @@
 var usuarioModel = require("../models/usuarioModel");
 
 function autenticar(req, res) {
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
+    var email = req.body.emailServer_login;
+    var senha = req.body.senhaServer_login;
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
@@ -19,21 +19,21 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
-                                    res.json({
-                                        idUsuario: resultadoAutenticar[0].idUsuario,
-                                        email: resultadoAutenticar[0].email,
-                                        nome: resultadoAutenticar[0].nome,
-                                        senha: resultadoAutenticar[0].senha,
-                                        tell: resultadoAutenticar[0].tell,
-                                        sexo: resultadoAutenticar[0].sexo
-                                    });
-                                } else {
-                                    res.status(204).json({ aquarios: [] });
-                                }
-                            })
+                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].idUsuario)
+                        //     .then((resultadoAquarios) => {
+                        //         if (resultadoAquarios.length > 0) {
+                        //             res.json({
+                        //                 idUsuario: resultadoAutenticar[0].idUsuario,
+                        //                 email: resultadoAutenticar[0].email,
+                        //                 nome: resultadoAutenticar[0].nome,
+                        //                 senha: resultadoAutenticar[0].senha,
+                        //                 tell: resultadoAutenticar[0].tell,
+                        //                 sexo: resultadoAutenticar[0].sexo
+                        //             });
+                        //         } else {
+                        //             res.status(204).json({ aquarios: [] });
+                        //         }
+                        //     })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {

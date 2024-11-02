@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Academia - Cadastro</title>
-    <link rel="stylesheet" href="style/estilo.css" />
+    <link rel="stylesheet" href="./style/estilo.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -21,7 +21,7 @@
       <div class="container">
         <div class="menu">
           <ul>
-            <a href="../home/index.html"><li><i class="fa-solid fa-house"></i>Home</li></a>
+            <a href="../index.html"><li><i class="fa-solid fa-house"></i>Home</li></a>
             <a href="../calculadora/calculadora.html"><li><i class="fa-solid fa-calculator"></i>Calculadora</li></a>
             <li><i class="fa-solid fa-image-portrait"></i>Sobre mim</li>
             <a href="../produtos/produtos.html"><li><i class="fa-solid fa-bag-shopping"></i>Produtos</li></a>
@@ -76,22 +76,22 @@
               <h5>Sexo</h5>
               <select id="select_sexo">
                 <option value="#">Selecione UM</option>
-                <option value="homem">Homem</option>
-                <option value="mulher">Mulher</option>
+                <option value="h">Homem</option>
+                <option value="m">Mulher</option>
               </select>
 
-              <button onclick="cadastrar()">Submit</button>
+              <button onclick="cadastrar()">Cadastrar</button>
             </form>
 
-            <form action="#" method="post" id="form_login">
+            <div id="form_login">
 
               <h5>E-mail</h5>
-              <input type="text" id="input_email" required/>
+              <input type="text" id="input_email_login" required/>
               <h5>Senha</h5>
-              <input type="password" id="input_senha" required/>
+              <input type="password" id="input_senha_login" required/>
 
-              <button type="submit">Submit</button>
-            </form>
+              <button onclick="entrar()">Entrar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -127,17 +127,22 @@
     var tell = input_tell.value;
     var sexo = select_sexo.value;
 
+
+    var formCadastro = document.getElementById('form_cadastro');
+    var formLogin = document.getElementById('form_login');
+
+
     if(
       nome == '' ||
       email == '' ||
       senha == '' ||
       tell == '' ||
-      sexo == ''
+      sexo == '#'
     ){
       alert("(Mensagem de erro para todos os campos em branco)");
     }else{
       // Enviando o valor da nova input
-    fetch("/cadastrar", {
+    fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -157,18 +162,76 @@
 
         if (resposta.ok) {
 
-            alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+            alert("Cadastro realizado com sucesso!");
 
+          formLogin.classList.add("active");
+          formCadastro.classList.remove("active");
+          ativo2.style.display = "block";
+          ativo1.style.display = "none";
+          
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
       });
 
     return false;
     }
+  }
+
+  function entrar(){
+
+        var email_login = input_email_login.value;
+        var senha_login = input_senha_login.value;
+
+        if (email_login == "" || senha_login == "") {
+
+            alert("(Mensagem de erro para todos os campos em branco)");
+
+            return false;
+        }
+        else {
+
+        console.log("FORM LOGIN: ", email_login);
+        console.log("FORM SENHA: ", senha_login);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer_login: email_login,
+                senhaServer_login: senha_login
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                });
+                window.location = "../index.html";
+
+            } else {
+              console.log(resposta);
+                console.log("Houve um erro ao tentar realizar o login!");
+
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+        }
   }
 </script>
