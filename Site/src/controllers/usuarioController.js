@@ -17,23 +17,9 @@ function autenticar(req, res) {
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
                     if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
-
-                        // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].idUsuario)
-                        //     .then((resultadoAquarios) => {
-                        //         if (resultadoAquarios.length > 0) {
-                        //             res.json({
-                        //                 idUsuario: resultadoAutenticar[0].idUsuario,
-                        //                 email: resultadoAutenticar[0].email,
-                        //                 nome: resultadoAutenticar[0].nome,
-                        //                 senha: resultadoAutenticar[0].senha,
-                        //                 tell: resultadoAutenticar[0].tell,
-                        //                 sexo: resultadoAutenticar[0].sexo
-                        //             });
-                        //         } else {
-                        //             res.status(204).json({ aquarios: [] });
-                        //         }
-                        //     })
+                        const usuario = resultadoAutenticar[0];
+                        console.log("Usuário autenticado com sucesso:", usuario);
+                        res.status(200).json(usuario);
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {

@@ -80,18 +80,18 @@
                 <option value="m">Mulher</option>
               </select>
 
-              <button onclick="cadastrar()">Cadastrar</button>
+              <button type="button" onclick="cadastrar()">Cadastrar</button>
             </form>
 
-            <div id="form_login">
+            <form id="form_login">
 
               <h5>E-mail</h5>
               <input type="text" id="input_email_login" required/>
               <h5>Senha</h5>
               <input type="password" id="input_senha_login" required/>
 
-              <button onclick="entrar()">Entrar</button>
-            </div>
+              <button type="button" onclick="entrar()">Entrar</button>
+            </form>
           </div>
         </div>
       </div>
@@ -210,7 +210,6 @@
             console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
-                console.log(resposta);
 
                 resposta.json().then(json => {
                     console.log(json);
@@ -218,11 +217,12 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
+                    window.location = "../index.html";
                 });
-                window.location = "../index.html";
 
             } else {
               console.log(resposta);
+              alert("Email e/ou senha inválido(s).");
                 console.log("Houve um erro ao tentar realizar o login!");
 
             }
