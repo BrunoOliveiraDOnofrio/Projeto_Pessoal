@@ -5,6 +5,7 @@
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     list-style: none;
+    
 }
 
 .container {
@@ -88,63 +89,124 @@
 }
 
 .categoria {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
     align-items: center;
-    text-align: center;
-    justify-content: space-around;
-    background-color: #a200ff;
+    background-color:  #c300ff;
     padding: 20px;
-    height: 500px;
 }
 
 .categoria img {
-    width: 200px;
-    height: 200px;
-}
-
-.categoria div h3 {
-    font-weight: 800;
-    font-size: 25px;
-}
-
-#creatina.escondido , #whey.escondido , #hiper.escondido , #glutamina.escondido , #garrafa.escondido{
-    max-height: 200px;
-    opacity: 1;
-    visibility: visible;
-    align-items: center;
-    margin: auto;
-}
-
-#creatina , #whey , #hiper , #glutamina , #garrafa{
-    opacity: 0;
-    visibility: hidden;
-    max-height: 0;
-    transition: opacity 0.5s ease, max-height 0.5s ease, visibility 0.5s ease;
-    overflow: hidden;
-    border-radius: 0 0 12px 12px;
-}
-
-#creatina h2 , #whey h2 , #hiper h2 , #glutamina h2 , #garrafa h2{
-    background-color: rgb(34, 32, 32);
-    cursor: default;
-    color: white;
-    border-radius: 12px 12px 0 0;
-}
-
-#creatina div , #whey div , #hiper div , #glutamina div , #garrafa div{
-    border-radius: 0 0 12px 12px;
-    margin: 0 auto;
-    background-color: rgb(80, 75, 75);
-
-}
-
-#creatina div h4 , #whey div h4 , #hiper div h4 , #glutamina div h4 , #garrafa div h4{
-    padding: 5px;
-    text-align: start;
-    color: white;
     width: 250px;
-    height: 45px;
+    height: 250px;
+
+}
+
+.produtos {
+    display: flex;
+    position: relative;
+    width: 350px;
+    height: 350px;
+    left: 50px;
+}
+
+.p_lista {
+    position: absolute;
+    width: 350px;
+    transition: transform 600ms cubic-bezier(0.3, 0.8, 0.5, 1), opacity 600ms cubic-bezier(0.3, 0.8, 0.5, 1);
+    opacity: 1;
+}
+
+.primeiro {
+    z-index: 1;
+    transform: translateX(calc(-100%)) scale(0.6);
+}
+
+.segundo {
+    z-index: 2;
+    transform: translateX(calc(-50%)) scale(0.8);
+}
+
+.terceiro {
+    z-index: 3;
+    transform: translateX(calc(0%)) scale(1);
+}
+
+.quarto {
+    z-index: 2;
+    transform: translateX(calc(50%)) scale(0.8);
+}
+
+.quinto {
+    z-index: 1;
+    transform: translateX(calc(100%)) scale(0.6);
+}
+
+.btn{
+    
+    background-color: #3f3f3f;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border: 1px #c300ff solid;
+    border-radius: 100%;
+    font-size: 25px;
+    transition: 0.6s ease;
+}
+
+.btn-left {
+    position: absolute;
+    top: 175px;
+    transform: rotate(220deg);
+    z-index: 4;
+    left: 100px;
+}
+
+.btn-right{
+    position: absolute;
+    top: 175px;
+    transform: translateY(-50%);
+    z-index: 4;
+    left: 1250px;
+    transform: rotate(40deg);
+
+}
+
+.btn:hover {
+    color: #c300ff;
+    transition: 0.6s ease;
+    cursor: pointer;
+}
+
+.produto{
+    font-size: 40px;
+    cursor: default;
+}
+
+.beneficios{
+    background-color: #3f3f3f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 10px 30px 10px #3f3f3f;
+    cursor: default;
+}
+
+.beneficios h2 {
+    font-size: 30px;
+    padding: 20px;
+    color: #c300ff;
+}
+
+.beneficios div{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    font-size: 20px;
+    padding: 20px;
 }
 
 .yopro{

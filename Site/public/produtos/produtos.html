@@ -52,77 +52,30 @@
       <h2>Produtos para acompanhamento</h2>
     </div>
 
-    <div class="categoria">
-      <div>
-        <img src="imagem/creatina.PNG" alt="" onmouseenter="aparecer('creatina')" onmouseleave="sumir('creatina')"/>
-        <h3>Creatina</h3>
-        <div id="creatina">
-          <h2>Benefícios</h2>
-          <div>
-            <h4>1.Aumento da massa muscular</h4>
-            <hr>
-            <h4>2.Prevenção de doenças crônicas</h4>
-            <hr>
-            <h4>3.Favorecimento da atividade cerebral</h4>
-          </div>
-        </div>
+    <div class="categoria" >
+      <div class="produtos" id="formList-img">
+        <div class="p_lista primeiro"><img src="imagem/creatina.PNG" alt=""></div>
+        <div class="p_lista segundo"><img src="imagem/whey.PNG" alt=""></div>
+        <div class="p_lista terceiro"><img src="imagem/hiper.PNG" alt=""></div>
+        <div class="p_lista quarto"><img src="imagem/glutamina.PNG" alt=""></div>
+        <div class="p_lista quinto"><img src="imagem/garrafa.PNG" alt=""></div>
       </div>
-      <div>
-        <img src="imagem/whey.PNG" alt="" onmouseenter="aparecer('whey')" onmouseleave="sumir('whey')"/>
-        <h3>Whey Protein</h3>
-        <div id="whey">
-          <h2>Benefícios</h2>
-          <div>
-            <h4>1.Redução de gordura corporal</h4>
-            <hr>
-            <h4>2.Combate à desnutrição</h4>
-            <hr>
-            <h4>3.Fortalece o sistema imunológico</h4>
-          </div>
-        </div>
-      </div>
-      <div>
-        <img src="imagem/hiper.PNG" alt="" onmouseenter="aparecer('hiper')" onmouseleave="sumir('hiper')"/>
-        <h3>Hipercalórico</h3>
-        <div id="hiper">
-          <h2>Benefícios</h2>
-          <div>
-            <h4>1.Alta concentração de energia</h4>
-            <hr>
-            <h4>2.Otimiza tempo de uma refeição</h4>
-            <hr>
-            <h4>3.Ajuda a atingir as calorias diárias</h4>
-          </div>
-        </div>
-      </div>
-      <div>
-        <img src="imagem/glutamina.PNG" alt="" onmouseenter="aparecer('glutamina')" onmouseleave="sumir('glutamina')"/>
-        <h3>Glutamina</h3>
-        <div id="glutamina">
-          <h2>Benefícios</h2>
-          <div>
-            <h4>1.Ajuda na absorção de nutrientes</h4>
-            <hr>
-            <h4>2.Auxilia no emagrecimento</h4>
-            <hr>
-            <h4>3.Melhora do humor e da memória</h4>
-          </div>
-        </div>
-      </div>
-      <div>
-        <img src="imagem/garrafa.PNG" alt="" onmouseenter="aparecer('garrafa')" onmouseleave="sumir('garrafa')"/>
-        <h3>Garrafa 2L</h3>
-        <div id="garrafa">
-          <h2>Benefícios</h2>
-          <div>
-            <h4>1.Otimização de tempo</h4>
-            <hr>
-            <h4>2.Bater metas diárias</h4>
-            <hr>
-            <h4>3.Transporte de nutrientes para o músculo</h4>
-          </div>
-        </div>
-      </div>
+
+      <button class="btn-left btn" id="next"><i class="fa-solid fa-location-arrow"></i></button>
+      <button class="btn-right btn" id="prev"><i class="fa-solid fa-location-arrow"></i></button>
+
+      <div id="div_Produto"><h2 class="produto">Hipercalórico</h2></div>
+      <br>
+      <br>
+      <div id="div_Beneficios" class="beneficios">
+        <h2>Benefícios</h2>
+        <div>
+          <h4>•.Alta concentração de energia</h4>
+          <hr>
+          <h4>•.Otimiza tempo de uma refeição</h4>
+          <hr>
+          <h4>•.Ajuda a atingir as calorias diárias</h4>
+        </div></div>
     </div>
 
     <div class="titulo">
@@ -153,6 +106,161 @@
 </html>
 
 <script>
+
+document.getElementById("next").addEventListener("click", () => {
+    moveRight();
+});
+
+document.getElementById("prev").addEventListener("click", () => {
+    moveLeft();
+});
+
+function moveRight() {
+    const items = document.querySelectorAll(".p_lista");
+    var Produto = ``;
+    var Beneficios = ``;
+    items.forEach(item => {
+        if (item.classList.contains("primeiro")) {
+            item.classList.replace("primeiro", "segundo");
+            Produto = `Creatina`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+            <div>
+            <h4>•.Aumento da massa muscular</h4>
+            <hr>
+            <h4>•.Prevenção de doenças crônicas</h4>
+            <hr>
+            <h4>•.Favorecimento da atividade cerebral</h4>
+          </div>`;
+          div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("segundo")) {
+            item.classList.replace("segundo", "terceiro");
+            Produto = `Garrafa 2L`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Otimização de tempo</h4>
+            <hr>
+            <h4>•.Bater metas diárias</h4>
+            <hr>
+            <h4>•.Transporte de nutrientes para o músculo</h4>
+          </div>`;
+            div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("terceiro")) {
+            item.classList.replace("terceiro", "quarto");
+            Produto = `Glutamina`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Ajuda na absorção de nutrientes</h4>
+            <hr>
+            <h4>•.Auxilia no emagrecimento</h4>
+            <hr>
+            <h4>•.Melhora do humor e da memória</h4>
+          </div>`;
+            div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("quarto")) {
+            item.classList.replace("quarto", "quinto");
+            Produto = `Hipercalórico`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Alta concentração de energia</h4>
+            <hr>
+            <h4>•.Otimiza tempo de uma refeição</h4>
+            <hr>
+            <h4>•.Ajuda a atingir as calorias diárias</h4>
+          </div>`;
+          div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("quinto")) {
+            item.classList.replace("quinto", "primeiro");
+            Produto = `Whey Protein`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Redução de gordura corporal</h4>
+            <hr>
+            <h4>•.Combate à desnutrição</h4>
+            <hr>
+            <h4>•.Fortalece o sistema imunológico</h4>
+          </div>`;
+            div_Beneficios.innerHTML = Beneficios;
+        }
+    });
+}
+
+function moveLeft() {
+    const items = document.querySelectorAll(".p_lista");
+    items.forEach(item => {
+        if (item.classList.contains("primeiro")) {
+            item.classList.replace("primeiro", "quinto");
+            Produto = `Hipercalórico`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Alta concentração de energia</h4>
+            <hr>
+            <h4>•.Otimiza tempo de uma refeição</h4>
+            <hr>
+            <h4>•.Ajuda a atingir as calorias diárias</h4>
+          </div>`;
+          div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("segundo")) {
+            item.classList.replace("segundo", "primeiro");
+            Produto = `Whey Protein`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Redução de gordura corporal</h4>
+            <hr>
+            <h4>•.Combate à desnutrição</h4>
+            <hr>
+            <h4>•.Fortalece o sistema imunológico</h4>
+          </div>`;
+            div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("terceiro")) {
+            item.classList.replace("terceiro", "segundo");
+            Produto = `Creatina`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+            <div>
+            <h4>•.Aumento da massa muscular</h4>
+            <hr>
+            <h4>•.Prevenção de doenças crônicas</h4>
+            <hr>
+            <h4>•.Favorecimento da atividade cerebral</h4>
+          </div>`;
+          div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("quarto")) {
+            item.classList.replace("quarto", "terceiro");
+            Produto = `Garrafa 2L`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Otimização de tempo</h4>
+            <hr>
+            <h4>•.Bater metas diárias</h4>
+            <hr>
+            <h4>•.Transporte de nutrientes para o músculo</h4>
+          </div>`;
+            div_Beneficios.innerHTML = Beneficios;
+        } else if (item.classList.contains("quinto")) {
+            item.classList.replace("quinto", "quarto");
+            Produto = `Glutamina`;
+            div_Produto.innerHTML = `<h2 class=produto>${Produto}</h2>`;
+            Beneficios = `<h2>Benefícios</h2>
+          <div>
+            <h4>•.Ajuda na absorção de nutrientes</h4>
+            <hr>
+            <h4>•.Auxilia no emagrecimento</h4>
+            <hr>
+            <h4>•.Melhora do humor e da memória</h4>
+          </div>`;
+            div_Beneficios.innerHTML = Beneficios;
+        }
+    });
+}
+
   function aparecer(form) {
     var creatina = document.getElementById("creatina");
     var whey = document.getElementById("whey");
