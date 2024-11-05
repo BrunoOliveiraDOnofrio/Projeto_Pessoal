@@ -72,7 +72,7 @@
               <h5>Senha</h5>
               <input type="password" id="input_senha" required/>
               <h5>Telefone</h5>
-              <input type="text" id="input_tell" required>
+              <input type="text" id="input_tell" maxlength="15" OnKeyPress="formatar('(##) #####-#####',this)" required>
               <h5>Sexo</h5>
               <select id="select_sexo">
                 <option value="#">Selecione UM</option>
@@ -120,6 +120,48 @@
       }
   }
 
+  function caracterEspecial() {
+    var senha = input_senha.value;
+    var caracterEspecial = "/([~`!@#$%\^&*+=\-\[\]\\';,/{}|\":<>\?])";
+
+    var retorno = true;
+    for(var j = 0 ; j < senha.length ; j++){
+      for(var i = 0 ; i < caracterEspecial.length ; i++){
+      if(caracterEspecial[i] == senha[j]){
+        retorno = false;
+      }
+    }
+    }
+    return retorno;
+  }
+  
+  function contemNumero() {
+    var senha = input_senha.value;
+    var numeros = "1234567890";
+
+    var retorno = true;
+    for(var j = 0 ; j < senha.length ; j++){
+      for(var i = 0 ; i < numeros.length ; i++){
+        if(numeros[i] == senha[j]){
+          retorno = false;
+        }
+      }
+    }
+    return retorno;
+  }
+
+  function formatar(mascara, documento) {
+    var i = documento.value.length;
+    var saida = '#';
+    var texto = mascara.substring(i);
+    while (texto.substring(0, 1) != saida && texto.length ) {
+      documento.value += texto.substring(0, 1);
+      i++;
+      texto = mascara.substring(i);
+    }
+  }
+  
+
   function cadastrar() {
     var nome = input_nome.value;
     var email = input_email.value;
@@ -131,6 +173,8 @@
     var formCadastro = document.getElementById('form_cadastro');
     var formLogin = document.getElementById('form_login');
 
+    var tamanho_senha = senha.length;
+    var emailCerto = email.includes("@gmail.com");
 
     if(
       nome == '' ||
@@ -141,7 +185,28 @@
     ){
       alert("(Mensagem de erro para todos os campos em branco)");
     }else{
-      // Enviando o valor da nova input
+      if(
+        tamanho_senha < 8
+      ){
+        alert("(A senha deve ter no mínimo 8 caracteres)");
+      }
+      if(
+        caracterEspecial()
+      ){
+        alert("(A senha precisa de caracter especial)");
+      }
+      if(
+        contemNumero()
+      ){
+        alert("(A senha deve conter um número)");
+      }
+      if(
+        !emailCerto
+      ){
+        alert("(O email precisa terminar com '@gmail.com')");
+      }
+      else{
+              // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
@@ -179,6 +244,8 @@
 
     return false;
     }
+      }
+
   }
 
   function entrar(){

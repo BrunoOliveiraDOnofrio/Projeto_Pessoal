@@ -10,8 +10,8 @@
 .container {
     width: 100%;
     position: fixed;
-    background-color: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.397) 0%, rgba(0,0,0,1) 100%);
     z-index: 5;
 }
 
@@ -128,7 +128,7 @@ h2{
     cursor: default;
     color: white;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-
+    
 }
 
 .estrategias {
