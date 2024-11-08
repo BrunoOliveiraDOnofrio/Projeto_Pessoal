@@ -5,6 +5,11 @@
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     list-style: none;
+
+}
+
+body {
+    overflow-x: hidden;
 }
 
 .container {
@@ -55,12 +60,25 @@
     transition: 0.3s ease;
 }
 
-
 .banner {
     background-image: url(../imagem/fundo_roxo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+
+}
+
+.cavaleiro{
+    width: 50vw;
+}
+
+.cavaleiro img{
+    width: 1000px;
+    height: 2000px;
+    position: relative;
+    right: 100px;
+    top: 650px;
+
 }
 
 .texto{
@@ -90,15 +108,30 @@
 
 }
 
-.titulo {
+.titulo2 {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     text-align: center;
     padding: 10px;
     background-color: rgb(34, 32, 32);
     cursor: default;
     color: white;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.titulo {
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(34, 32, 32);
+    cursor: default;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.titulo h2 {
+    width: 48%;
 }
 
 .about {
@@ -109,8 +142,10 @@
 
 .discucao {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
+    width: 80%;
+    margin: auto;
 }
 
 .discucao div {
@@ -133,8 +168,7 @@ span {
 
 .conexao {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: start;
 }
 
 .conexao div {
@@ -177,4 +211,46 @@ span {
     border: none;
     border-radius: 15px;
     transition: transform 0.3s ease;
+}
+
+.curiosidade {
+    background-color: rgba(0, 0, 0, 0.829);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+form {
+    background-color: #1f1f1f;
+    width: 50vw;
+    height: 60vw;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
+    color: white;
+    gap: 10px;
+}
+
+input , select , button{
+    border: 1px black solid;
+    padding: 10px;
+    border-radius: 28px;
+    width: 300px;
+    cursor: pointer;
+    box-shadow: 5px 10px 110px black inset;
+    color: white;
+}
+
+select option {
+    background-color: #c300ff;
+}
+
+h3 {
+    font-size: 20px;
+    cursor: default;
+
 }
