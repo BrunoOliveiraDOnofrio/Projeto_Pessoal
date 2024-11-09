@@ -122,6 +122,28 @@ body {
     width: 50px;
 }
 
+.card_erro {
+    display: none;
+    background-color: #c300ff;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 20px;
+    border: solid 2px black;
+    padding: 10px;
+    text-align: center;
+}
+  
+.card_erro #mensagem_erro{
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+}
+
+.card_erro img {
+    width: 100px;
+}
+
 .right {
     background: rgb(135,29,167);
     background: linear-gradient(149deg, rgba(135,29,167,1) 0%, rgba(0,0,0,1) 48%);

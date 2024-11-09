@@ -50,7 +50,11 @@
         </div>
       </div>
     </div>
-
+    <div class="card_erro" id="cardErro">
+      <img src="imagem/peso.PNG" alt="">
+      <span id="mensagem_erro"></span>
+      
+    </div>
       <div class="right">
         <div class="box-right">
           <div class="tudo">
@@ -161,6 +165,15 @@
     }
   }
   
+  function tellCorreto() {
+    var tell = input_tell.value.length;
+
+    var retorno = true;
+    if(tell < 15){
+      retorno = false;
+    }
+    return retorno;
+  }
 
   function cadastrar() {
     var nome = input_nome.value;
@@ -183,27 +196,62 @@
       tell == '' ||
       sexo == '#'
     ){
-      alert("(Mensagem de erro para todos os campos em branco)");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "Preencha todos os campos!";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, 3000);
     }else{
       if(
         tamanho_senha < 8
       ){
-        alert("(A senha deve ter no mínimo 8 caracteres)");
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "A senha deve ter no mínimo 8 caracteres!";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, 3000);
       }
-      if(
+      else if(
         caracterEspecial()
       ){
-        alert("(A senha precisa de caracter especial)");
+        cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "A senha precisa de caractere especial!";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, 3000);
       }
-      if(
+      else if(
         contemNumero()
       ){
-        alert("(A senha deve conter um número)");
+        cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "A senha deve conter um número";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, 3000);
       }
-      if(
+      else if(
         !emailCerto
       ){
-        alert("(O email precisa terminar com '@gmail.com')");
+        cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "O email precisa terminar com @gmail.com";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, 3000);
+      }
+      else if(
+        !tellCorreto()
+      ){
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "O telefone precisa ter 11 dígitos!";
+      setTimeout(() => {
+        cardErro.style.display = "none";
+      }, 3000);
       }
       else{
               // Enviando o valor da nova input
