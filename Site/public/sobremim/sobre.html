@@ -159,29 +159,29 @@
         <h3>Qual foi sua motivação para começar a treinar ?</h3>
         <select name="" id="select_motivacao">
           <option value="#">Selecione UM</option>
-          <option value="saude">Necessidade de Saúde</option>
-          <option value="rotina">Rotina Saudável</option>
-          <option value="hobbie">Treinar por hobbie</option>
-          <option value="Superar">Superar momentos Difíceis</option>
-          <option value="site">Meu site >:)</option>
+          <option value="Melhorar Saúde">Necessidade de Saúde</option>
+          <option value="Rotina">Rotina Saudável</option>
+          <option value="Hobbie">Treinar por hobbie</option>
+          <option value="Superação">Superar momentos Difíceis</option>
+          <option value="Site">Meu site >:)</option>
         </select>
 
         <h3>Qual academia você frequenta ?</h3>
         <select name="" id="select_academia">
           <option value="#">Selecione UM</option>
-          <option value="smart">SmartFit</option>
-          <option value="red">RedFit</option>
-          <option value="Blue">BlueFit</option>
-          <option value="fator">Fator</option>
-          <option value="bio">Bio Ritmo</option>
-          <option value="body">Bodytech</option>
+          <option value="Smart Fit">SmartFit</option>
+          <option value="RedFit">RedFit</option>
+          <option value="BlueFit">BlueFit</option>
+          <option value="Fator">Fator</option>
+          <option value="BioRitmo">Bio Ritmo</option>
+          <option value="BodyTech">Bodytech</option>
         </select>
 
         <h3>Toma suplemento ?</h3>
         <select name="" id="select_sulplemento">
           <option value="#">Selecione UM</option>
-          <option value="s">Sim</option>
-          <option value="n">Não</option>
+          <option value="1">Sim</option>
+          <option value="0">Não</option>
         </select>
 
         <h3>Qual sua frequência de treinos?</h3>
@@ -199,12 +199,9 @@
         <h3>Qual seu objetivo na academia ?</h3>
         <select name="" id="select_obj">
           <option value="#">Selecione UM</option>
-          <option value="massa">Ganho de massa</option>
-          <option value="definicao">Definir o corpo</option>
+          <option value="Ganhar Massa">Ganho de massa</option>
+          <option value="Definição">Definir o corpo</option>
         </select>
-
-        <h3>Quando você começou ou pretende começar a academia ?</h3>
-        <input type="date" id="input_dtinicio" />
 
         <h3>Qual seu peso atual ?</h3>
         <input type="number" id="input_pesoAtual" />
@@ -212,11 +209,61 @@
         <h3>Qual sua meta de peso ?</h3>
         <input type="number" id="input_meta" />
 
-        <button>Enviar</button>
+        <button type="button" onclick="Guardar()" >Enviar</button>
       </form>
     </div>
   </body>
 </html>
 <script>
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+  function Guardar () {
+    var motivacao = select_motivacao.value;
+    var academia = select_academia.value;
+    var suplemento = Number(select_sulplemento.value);
+    var frequenciaSemana = Number(select_frequencia.value);
+    var objetivo = select_obj.value;
+
+    var pesoAtual = Number(input_pesoAtual.value);
+    var alvo = Number(input_meta.value);
+    var fkUsuario = Number(sessionStorage.ID_USUARIO);
+
+
+    fetch("/curiosidade/Guardar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        motivacaoServer: motivacao,
+        academiaServer: academia,
+        suplementoServer: suplemento,
+        frequenciaSemanaServer: frequenciaSemana,
+        objetivoServer: objetivo,
+
+        pesoAtualServer: pesoAtual,
+        alvoServer: alvo,
+        fkUsuarioServer: fkUsuario
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+            alert("Armazenamento realizado com sucesso!");
+          
+        } else {
+          throw "Houve um erro ao tentar guardar os dados";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+
+  }
 </script>
