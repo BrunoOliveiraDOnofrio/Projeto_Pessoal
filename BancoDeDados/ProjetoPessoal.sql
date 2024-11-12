@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS curiosidade(
     motivacao VARCHAR(45) NOT NULL,
     academia VARCHAR(45) NOT NULL,
     suplemento TINYINT NOT NULL,
+    dtNasc DATE NOT NULL,
     frequenciaSemana INT NOT NULL,
     objetivo VARCHAR(20) NOT NULL,
     pesoAtual DOUBLE NOT NULL,
@@ -23,7 +24,3 @@ CREATE TABLE IF NOT EXISTS curiosidade(
     CONSTRAINT fkUsuarioCuriosidade FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
-
-select * from usuario;
-truncate table usuario;
-describe usuario;

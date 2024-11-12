@@ -8,7 +8,7 @@ function Guardar(req, res) {
     var suplemento = req.body.suplementoServer;
     var frequenciaSemana = req.body.frequenciaSemanaServer;
     var objetivo = req.body.objetivoServer;
-
+    var dtNasc = req .body.dtNascServer;
     var pesoAtual = req.body.pesoAtualServer;
     var alvo = req.body.alvoServer;
     var fkUsuario = req.body.fkUsuarioServer
@@ -21,6 +21,8 @@ function Guardar(req, res) {
         res.status(400).send("Selecione Algo!");
     } else if (suplemento == '#') {
         res.status(400).send("Selecione Algo!");
+    } else if(dtNasc == undefined){
+        res.status(400).send("Fale sua idade!");
     } else if (frequenciaSemana == '#') {
         res.status(400).send("Selecione Algo!");
     } else if(objetivo == '#'){
@@ -32,7 +34,7 @@ function Guardar(req, res) {
     }else{
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        curiosidadeModel.Guardar(motivacao, academia, suplemento, frequenciaSemana, objetivo, pesoAtual, alvo, fkUsuario)
+        curiosidadeModel.Guardar(motivacao, academia, suplemento, dtNasc, frequenciaSemana, objetivo, pesoAtual, alvo, fkUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
