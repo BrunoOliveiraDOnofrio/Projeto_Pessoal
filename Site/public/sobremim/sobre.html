@@ -206,12 +206,6 @@
           <option value="Definição">Definir o corpo</option>
         </select>
 
-        <h3>Qual seu peso atual ?</h3>
-        <input type="number" id="input_pesoAtual" />
-
-        <h3>Qual sua meta de peso ?</h3>
-        <input type="number" id="input_meta" />
-
         <button type="button" onclick="Guardar()" >Enviar</button>
       </form>
     </div>
@@ -227,8 +221,6 @@
     var frequenciaSemana = Number(select_frequencia.value);
     var objetivo = select_obj.value;
     var dtNasc = input_dtNasc.value;
-    var pesoAtual = Number(input_pesoAtual.value);
-    var alvo = Number(input_meta.value);
     var fkUsuario = Number(sessionStorage.ID_USUARIO);
 
 
@@ -246,8 +238,7 @@
         frequenciaSemanaServer: frequenciaSemana,
         objetivoServer: objetivo,
         dtNascServer: dtNasc,
-        pesoAtualServer: pesoAtual,
-        alvoServer: alvo,
+
         fkUsuarioServer: fkUsuario
       }),
     })

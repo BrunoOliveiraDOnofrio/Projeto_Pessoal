@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia - Dashboard</title>
+    <link rel="stylesheet" href="style/estilo.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="../home/imagem/dumbbell-solid.svg"
+      type="image/x-icon"
+    />
+</head>
+<body>
+    <section>
+        <div class="container">
+          <div class="menu">
+            <ul>
+              <li>Bem Vindo! <span id="b_usuario"></span>.</li>
+              <li>Sobre Mim</li>
+              <li>Dashboard</li>
+            </ul>
+          </div>
+        </div>
+    </section>
+
+    <div class="info">
+        <div class="kpi">
+
+        </div>
+        <div class="progresso">
+
+        </div>
+        <div class="dash">
+            <h3>Relação entre Idade e Frequência Semanal de Treinos</h3>
+            <canvas id="idadeFrequenciaChart"></canvas>
+        </div>
+    </div>
+
+
+</body>
+</html>
+<script>
+
+function calcularIdade(dtNasc) {
+    const hoje = new Date();
+    const nascimento = new Date(dtNasc);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    return idade;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/curiosidade/frequencia_por_idade')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dados recebidos:', data);  // Verifique o conteúdo de "data"
+
+            if (data.erro) {
+                // Exibe uma mensagem de erro caso a API retorne um erro
+                console.error('Erro na API:', data.erro);
+                // Exiba uma mensagem amigável ao usuário na tela
+                alert('Erro ao buscar dados: ' + data.erro);
+                return;  // Não continue o processamento
+            }
+
+
+            if (data && Array.isArray(data.dados)) {
+
+                const scatterData = data.dados.map(item => ({
+                    x: calcularIdade(item.dtNasc),
+                    y: item.frequenciaSemana
+                }));
+
+
+                const ctx = document.getElementById('idadeFrequenciaChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'Frequência Semanal por Idade',
+                            data: scatterData, 
+                            backgroundColor: '#42a5f5',
+                            borderColor: '#1e88e5'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Idade'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Frequência (Dias por Semana)'
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.error('Estrutura de dados inesperada:', data);
+                alert('Dados recebidos não estão no formato esperado.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+            alert('Erro ao buscar dados da API. Tente novamente mais tarde.');
+        });
+});
+</script>

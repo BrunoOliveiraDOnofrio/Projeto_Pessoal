@@ -18,9 +18,18 @@ CREATE TABLE IF NOT EXISTS curiosidade(
     dtNasc DATE NOT NULL,
     frequenciaSemana INT NOT NULL,
     objetivo VARCHAR(20) NOT NULL,
-    pesoAtual DOUBLE NOT NULL,
-    alvo DOUBLE NOT NULL,
-    fkUsuario INT,
+    fkUsuario INT UNIQUE,
     CONSTRAINT fkUsuarioCuriosidade FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
+CREATE TABLE IF NOT EXISTS progresso(
+	idProgresso INT PRIMARY KEY AUTO_INCREMENT,
+    dtRegistro DATE NOT NULL,
+    peso DOUBLE NOT NULL,
+    percentualGordura DOUBLE,
+    pesoAlvo DOUBLE NOT NULL,
+    fkUsuario INT,
+	CONSTRAINT fkUsuarioProgresso FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
+);
+
+select * from curiosidade;

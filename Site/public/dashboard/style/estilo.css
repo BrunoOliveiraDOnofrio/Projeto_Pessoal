@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    list-style: none;
+
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.397) 0%, rgba(0,0,0,1) 100%);
+    z-index: 5;
+}
+
+.menu {
+    display: flex;
+    margin: auto;
+    justify-content: end;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+
+}
+
+.menu ul li {
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.menu ul li i {
+    margin-right: 10px;
+}
+
+.menu ul li:hover{
+    color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+    color: #c300ff;
+}
+
+.menu div:hover{
+    background-color: rgb(34, 32, 32);
+    transition: 0.3s ease;
+}
+
+.info {
+    display: grid;
+    grid-template-areas: 
+        "a a b"
+        "c c b"
+        "c c b";
+    gap: 10px;
+}
+
+.kpi {
+    grid-area: a;
+    background-color: #c300ff;
+}
+
+.progresso {
+    grid-area: b;
+    background-color: #00ffea;
+}
+
+.dash {
+    grid-area: c;
+
+}
