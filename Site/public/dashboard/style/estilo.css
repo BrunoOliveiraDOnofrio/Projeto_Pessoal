@@ -62,23 +62,55 @@ body {
 .info {
     display: grid;
     grid-template-areas: 
-        "a a b"
-        "c c b"
-        "c c b";
+        "a a b b"
+        "c c b b"
+        "c c b b";
     gap: 10px;
 }
 
 .kpi {
     grid-area: a;
     background-color: #c300ff;
+    height: 10vw;
 }
 
 .progresso {
     grid-area: b;
     background-color: #00ffea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    flex-direction: column;
+}
+
+.progresso div {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.progresso input, button{
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+}
+
+#idadeFrequenciaChart {
+    width: 100px;
 }
 
 .dash {
     grid-area: c;
+    width: 50vw;
+    position: relative;
+    left: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.dash h3 {
+    text-align: center;
 }

@@ -36,6 +36,18 @@
         </div>
         <div class="progresso">
 
+            <canvas id="idadeFrequenciaChart"></canvas>
+            <div>
+                <h3>Peso</h3>
+                <h3>Peso Alvo</h3>
+            </div>
+            <div>
+                <input type="number" id="input_peso">
+                <input type="number" id="input_pesoAlvo">
+            </div>
+
+            <button onclick="registrar()">Registrar</button>
+
         </div>
         <div class="dash">
             <h3>Relação entre Idade e Frequência Semanal de Treinos</h3>
@@ -47,6 +59,44 @@
 </body>
 </html>
 <script>
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function registrar() {
+    var peso = input_peso.value;
+    var pesoAlvo = input_pesoAlvo.value;
+    var fkUsuario = Number(sessionStorage.ID_USUARIO);
+
+    fetch("/dash/registrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+        pesoServer: peso,
+        pesoAlvoServer: pesoAlvo,
+        fkUsuarioServer: fkUsuario
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+            alert("Armazenamento realizado com sucesso!");
+          
+        } else {
+          throw "Houve um erro ao tentar guardar os dados";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+
+    }
 
 function calcularIdade(dtNasc) {
     const hoje = new Date();
@@ -63,14 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/curiosidade/frequencia_por_idade')
         .then(response => response.json())
         .then(data => {
-            console.log('Dados recebidos:', data);  // Verifique o conteúdo de "data"
+            console.log('Dados recebidos:', data);
 
             if (data.erro) {
-                // Exibe uma mensagem de erro caso a API retorne um erro
+                
                 console.error('Erro na API:', data.erro);
-                // Exiba uma mensagem amigável ao usuário na tela
+                
                 alert('Erro ao buscar dados: ' + data.erro);
-                return;  // Não continue o processamento
+                return;  
             }
 
 
@@ -80,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     x: calcularIdade(item.dtNasc),
                     y: item.frequenciaSemana
                 }));
-
 
                 const ctx = document.getElementById('idadeFrequenciaChart').getContext('2d');
                 new Chart(ctx, {

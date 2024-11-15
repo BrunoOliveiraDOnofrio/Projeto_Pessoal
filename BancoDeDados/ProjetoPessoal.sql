@@ -26,10 +26,10 @@ CREATE TABLE IF NOT EXISTS progresso(
 	idProgresso INT PRIMARY KEY AUTO_INCREMENT,
     dtRegistro DATE NOT NULL,
     peso DOUBLE NOT NULL,
-    percentualGordura DOUBLE,
     pesoAlvo DOUBLE NOT NULL,
     fkUsuario INT,
 	CONSTRAINT fkUsuarioProgresso FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
 select * from curiosidade;
+select * from usuario;
