@@ -77,7 +77,11 @@ body {
     grid-area: a;
     background-color: #1f1f1f;
     height: 10vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
+
 .dash {
     grid-area: c;
     width: 100%;
@@ -127,6 +131,13 @@ body {
     border: none;
     border-radius: 20px;
     width: 70%; 
+    cursor: pointer;
+    transition: 0.6s ease;
+}
+
+.progresso input:hover, .progresso button:hover {
+    background-color: #c300ff;
+    transition: 0.6s ease;
 }
 
 div h3 {
@@ -136,4 +147,18 @@ div h3 {
     cursor: default;
     color: white;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: default;
+}
+
+.kpi-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.kpi-card p {
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    cursor: default;
 }

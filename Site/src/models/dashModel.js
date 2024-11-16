@@ -40,27 +40,41 @@ function contarMotivacao() {
 }
 
 const kpiFrequencia = async () => {
-    const query = `
-        SELECT YEAR(NOW()) - YEAR(dtNasc) AS idade, 
-               TRUNCATE(AVG(frequenciaSemana), 1) AS frequenciaMedia 
-        FROM curiosidade 
-        GROUP BY idade 
-        ORDER BY frequenciaMedia DESC 
-        LIMIT 1
-    `;
-    return database.executar(query);
+    try {
+        const dados = await database.executar(`
+            SELECT 
+                YEAR(NOW()) - YEAR(dtNasc) AS idade, 
+                TRUNCATE(AVG(frequenciaSemana), 1) AS frequenciaMedia 
+            FROM curiosidade 
+            GROUP BY idade 
+            ORDER BY frequenciaMedia DESC 
+            LIMIT 1
+        `);
+        return dados;
+    } catch (erro) {
+        console.error("Erro ao executar a consulta de KPI Frequência:", erro);
+        throw erro;
+    }
 };
 
 const kpiMotivacao = async () => {
-    const query = `
-        SELECT motivacao, COUNT(motivacao) AS total 
-        FROM curiosidade 
-        GROUP BY motivacao 
-        ORDER BY total DESC 
-        LIMIT 1
-    `;
-    return database.executar(query);
+    try {
+        const dados = await database.executar(`
+            SELECT 
+                motivacao, 
+                COUNT(motivacao) AS total 
+            FROM curiosidade 
+            GROUP BY motivacao 
+            ORDER BY total DESC 
+            LIMIT 1
+        `);
+        return dados;
+    } catch (erro) {
+        console.error("Erro ao executar a consulta de KPI Motivação:", erro);
+        throw erro;
+    }
 };
+
 
 module.exports = {
     registrar,

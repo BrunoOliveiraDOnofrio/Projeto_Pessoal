@@ -13,6 +13,15 @@ function Guardar(motivacao, academia, suplemento, dtNasc, frequenciaSemana, obje
     return database.executar(instrucaoSql);
 }
 
+function verificarRegistro(fkUsuario) {
+    return database.executar(`
+        SELECT idCuriosidade 
+        FROM curiosidade 
+        WHERE fkUsuario = ${fkUsuario};
+    `);
+}
+
 module.exports = {
-    Guardar
+    Guardar,
+    verificarRegistro
 };

@@ -23,8 +23,9 @@
           <div class="menu">
             <ul>
               <li>Bem Vindo! <span id="b_usuario"></span>.</li>
-              <a href="../sobremim/sobre.html"><li>Sobre Mim</li></a>
-              <a href="./dash.html"><li>Dashboard</li></a>
+              <a href="../sobremim/sobre.html"><li><i class="fa-brands fa-ethereum"></i>Sobre Mim</li></a>
+              <a href="./dash.html"><li><i class="fa-solid fa-chart-line"></i>Dashboard</li></a>
+              <a href="#" onclick="logoff()"><li><i class="fa-solid fa-person-walking-arrow-right"></i>Logoff</li></a>
             </ul>
           </div>
         </div>
@@ -76,6 +77,12 @@
 <script>
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function logoff(){
+        sessionStorage.clear();
+
+        window.location.href = "../index.html";
+    }
 
     function registrar() {
     var peso = input_peso.value;
@@ -137,11 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data && data.length > 0) {
                     console.log('Dados carregados:', data);
 
-                    // Processar os dados do gráfico
                     const labels = data.map(item => new Date(item.dtRegistro).toLocaleDateString());
                     const pesos = data.map(item => item.peso);
 
-                    // Preencher o peso-alvo com o último valor válido
                     let ultimoPesoAlvo = 0;
                     const pesosAlvo = data.map(item => {
                         if (item.pesoAlvo != null) {
@@ -150,9 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return ultimoPesoAlvo;
                     });
 
-                    // Atualizar ou criar o gráfico
                     if (window.graficoPeso) {
-                        // Atualizar dados no gráfico existente
                         window.graficoPeso.data.labels = labels;
                         window.graficoPeso.data.datasets[0].data = pesos;
                         window.graficoPeso.data.datasets[1].data = pesosAlvo;
@@ -234,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const idades = dados.map(item => item.idade);
                 const frequencias = dados.map(item => item['Frequência Média']);
                 
-                // Criando o gráfico com os dados recebidos
                 const ctx = document.getElementById('idadeFrequenciaChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'polarArea',
@@ -271,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Chama a função para gerar o gráfico ao carregar a página
     gerarGraficoFrequenciaPorIdade();
 });
 
@@ -283,7 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const motivacoes = dados.map(item => item.motivacao);
                     const total = dados.map(item => item.total);
                     
-                    // Criando o gráfico com os dados recebidos
                     const ctx = document.getElementById('motivacaoChart').getContext('2d');
                     new Chart(ctx, {
                         type: 'bar',
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const motivacaoPopularElement = document.getElementById("kpiMotivacao");
     const idadeFrequenciaElement = document.getElementById("kpiFrequencia");
 
-    // Função para carregar motivação mais popular
+
     const carregarMotivacaoPopular = () => {
         fetch("/dash/kpiMotivacao")
             .then((response) => {
@@ -348,7 +348,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    // Função para carregar idade com maior frequência
     const carregarIdadeFrequencia = () => {
         fetch("/dash/kpiFrequencia")
             .then((response) => {
@@ -372,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    // Carregar as KPIs
     carregarMotivacaoPopular();
     carregarIdadeFrequencia();
 });

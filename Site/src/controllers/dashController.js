@@ -71,33 +71,34 @@ function contarMotivacao(req, res) {
             res.status(500).json({ erro: erro.sqlMessage });
         });
 }
-
-function kpiMotivacao(req, res) {
-    try {
-        const result = dashModel.kpiMotivacao();
-        if (result.length > 0) {
-            res.status(200).json(result[0]); // Retorna a motivação mais popular
-        } else {
-            res.status(404).json({ mensagem: "Nenhuma motivação encontrada." });
-        }
-    } catch (error) {
-        console.error("Erro ao buscar motivação mais popular:", error.sqlMessage);
-        res.status(500).json({ mensagem: "Erro ao buscar motivação mais popular." });
-    }
+function kpiFrequencia(req, res) {
+    dashModel.kpiFrequencia()
+        .then((dados) => {
+            if (dados && dados.length > 0) {
+                res.status(200).json(dados[0]); // Envia apenas o registro com a maior frequência média
+            } else {
+                res.status(404).json({ mensagem: "Nenhum dado encontrado para KPI de frequência." });
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao buscar KPI de frequência:", erro);
+            res.status(500).json({ erro: erro.sqlMessage || erro.message });
+        });
 }
 
-function kpiFrequencia(req, res) {
-    try {
-        const result = dashModel.kpiFrequencia();
-        if (result.length > 0) {
-            res.status(200).json(result[0]); // Retorna a idade com maior frequência
-        } else {
-            res.status(404).json({ mensagem: "Nenhuma frequência encontrada." });
-        }
-    } catch (error) {
-        console.error("Erro ao buscar idade com maior frequência:", error.sqlMessage);
-        res.status(500).json({ mensagem: "Erro ao buscar idade com maior frequência." });
-    }
+function kpiMotivacao(req, res) {
+    dashModel.kpiMotivacao()
+        .then((dados) => {
+            if (dados && dados.length > 0) {
+                res.status(200).json(dados[0]); // Envia apenas o registro com maior motivação
+            } else {
+                res.status(404).json({ mensagem: "Nenhum dado encontrado para KPI de motivação." });
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao buscar KPI de motivação:", erro);
+            res.status(500).json({ erro: erro.sqlMessage || erro.message });
+        });
 }
 
 

@@ -22,8 +22,9 @@
         <div class="menu">
           <ul>
             <li>Bem Vindo! <span id="b_usuario"></span>.</li>
-            <a href="./sobre.html"><li>Sobre Mim</li></a>
-            <a href="../dashboard/dash.html"><li>Dashboard</li></a>
+            <a href="./sobre.html"><li><i class="fa-brands fa-ethereum"></i>Sobre Mim</li></a>
+            <a href="../dashboard/dash.html"><li><i class="fa-solid fa-chart-line"></i>Dashboard</li></a>
+            <a href="#" onclick="logoff()"><li><i class="fa-solid fa-person-walking-arrow-right"></i>Logoff</li></a>
           </ul>
         </div>
       </div>
@@ -150,7 +151,7 @@
               </div>
             </div>
 
-    <div class="titulo2">
+    <div class="titulo2" id="bd">
       <h2>Agora me conte um pouco sobre você!</h2>
     </div>
 
@@ -214,6 +215,12 @@
 <script>
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
+  function logoff(){
+        sessionStorage.clear();
+
+        window.location.href = "../index.html";
+    }
+
   function Guardar () {
     var motivacao = select_motivacao.value;
     var academia = select_academia.value;
@@ -260,4 +267,23 @@
     return false;
 
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const fkUsuario = Number(sessionStorage.ID_USUARIO);
+    const porta = document.getElementById("bd");
+    const curiosidadeDiv = document.querySelector(".curiosidade");
+
+    fetch(`/curiosidade/verificar/${fkUsuario}`)
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.possuiRegistro) {
+                porta.style.display = "none";
+                curiosidadeDiv.style.display = "none";
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao verificar registro:", erro);
+        });
+  });
+
 </script>

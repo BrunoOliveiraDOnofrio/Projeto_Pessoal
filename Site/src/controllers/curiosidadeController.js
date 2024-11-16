@@ -46,6 +46,24 @@ function Guardar(req, res) {
     }
 }
 
+function verificarRegistro(req, res) {
+    const fkUsuario = req.params.fkUsuario;
+
+    curiosidadeModel.verificarRegistro(fkUsuario)
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json({ possuiRegistro: true });
+            } else {
+                res.status(200).json({ possuiRegistro: false });
+            }
+        })
+        .catch((erro) => {
+            console.error("\nErro ao verificar registro na tabela curiosidade: ", erro.sqlMessage);
+            res.status(500).json({ erro: erro.sqlMessage });
+        });
+}
+
 module.exports = {
-    Guardar
+    Guardar,
+    verificarRegistro
 }
