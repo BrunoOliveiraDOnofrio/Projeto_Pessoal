@@ -101,6 +101,14 @@ body {
     width: 100px;
 }
 
+#pesoChart {
+    width: 100px;
+}
+
+#motivacaoChart {
+    width:  100px;
+}
+
 .dash {
     grid-area: c;
     width: 50vw;

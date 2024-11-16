@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS progresso(
 	idProgresso INT PRIMARY KEY AUTO_INCREMENT,
     dtRegistro DATE NOT NULL,
     peso DOUBLE NOT NULL,
-    pesoAlvo DOUBLE NOT NULL,
+    pesoAlvo DOUBLE NULL,
     fkUsuario INT,
 	CONSTRAINT fkUsuarioProgresso FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );

@@ -1,5 +1,4 @@
 var curiosidadeModel = require("../models/curiosidadeModel");
-const database = require('../database/config');
 
 function Guardar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
@@ -46,30 +45,7 @@ function Guardar(req, res) {
             );
     }
 }
-const obterFrequenciaPorIdade = async (req, res) => {
-    try {
-      // Definindo a consulta SQL
-      const instrucaoSql = "SELECT dtNasc, frequenciaSemana FROM curiosidade";
-  
-      // Executando a consulta no banco de dados
-      const resultado = await database.executar(instrucaoSql);
-  
-      // Verificando se o banco retornou dados
-      if (resultado && resultado.length > 0) {
-        // Enviando os dados encontrados como resposta JSON
-        res.status(200).json({ dados: resultado });
-      } else {
-        // Caso não haja dados
-        res.status(404).json({ mensagem: 'Nenhum dado encontrado' });
-      }
-    } catch (err) {
-      // Em caso de erro ao executar a consulta ou processar os dados
-      console.error('Erro ao buscar dados:', err);
-      res.status(500).send({ erro: 'Erro ao buscar frequência por idade' });
-    }
-  };
 
 module.exports = {
-    Guardar,
-    obterFrequenciaPorIdade
+    Guardar
 }

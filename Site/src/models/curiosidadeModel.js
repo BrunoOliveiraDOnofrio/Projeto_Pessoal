@@ -13,13 +13,6 @@ function Guardar(motivacao, academia, suplemento, dtNasc, frequenciaSemana, obje
     return database.executar(instrucaoSql);
 }
 
-function getFrequenciaPorIdade() {
-    const instrucaoSql = "SELECT dtNasc, frequenciaSemana FROM curiosidade";
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 module.exports = {
-    Guardar,
-    getFrequenciaPorIdade
+    Guardar
 };

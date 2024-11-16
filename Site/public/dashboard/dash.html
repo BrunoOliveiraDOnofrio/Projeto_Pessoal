@@ -36,7 +36,9 @@
         </div>
         <div class="progresso">
 
-            <canvas id="idadeFrequenciaChart"></canvas>
+            <h3>Evolução de Peso</h3>
+            <canvas id="pesoChart"></canvas>
+            
             <div>
                 <h3>Peso</h3>
                 <h3>Peso Alvo</h3>
@@ -49,10 +51,14 @@
             <button onclick="registrar()">Registrar</button>
 
         </div>
+
         <div class="dash">
             <h3>Relação entre Idade e Frequência Semanal de Treinos</h3>
             <canvas id="idadeFrequenciaChart"></canvas>
+            <h3>Quantidade de Usuários por Motivação</h3>
+            <canvas id="motivacaoChart"></canvas>
         </div>
+        
     </div>
 
 
@@ -67,82 +73,173 @@
     var pesoAlvo = input_pesoAlvo.value;
     var fkUsuario = Number(sessionStorage.ID_USUARIO);
 
+    console.log("Enviando:", { peso, pesoAlvo, fkUsuario });
+
     fetch("/dash/registrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-
-        pesoServer: peso,
-        pesoAlvoServer: pesoAlvo,
-        fkUsuarioServer: fkUsuario
-      }),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            pesoServer: peso,
+            pesoAlvoServer: pesoAlvo,
+            fkUsuarioServer: fkUsuario,
+        }),
     })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+        .then((resposta) => {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                throw "Houve um erro ao tentar guardar os dados";
+            }
+        })
+        .then((data) => {
+            alert(data.mensagem);
 
-        if (resposta.ok) {
-
-            alert("Armazenamento realizado com sucesso!");
-          
-        } else {
-          throw "Houve um erro ao tentar guardar os dados";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+            if (data.dados) {
+                atualizarGraficoPeso(data.dados); 
+            }
+        })
+        .catch((erro) => {
+            console.error(`#ERRO: ${erro}`);
+            alert("Erro ao atualizar gráfico!");
+        });
 
     return false;
-
-    }
-
-function calcularIdade(dtNasc) {
-    const hoje = new Date();
-    const nascimento = new Date(dtNasc);
-    let idade = hoje.getFullYear() - nascimento.getFullYear();
-    const mes = hoje.getMonth() - nascimento.getMonth();
-    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
-        idade--;
-    }
-    return idade;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/curiosidade/frequencia_por_idade')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Dados recebidos:', data);
+    const fkUsuario = sessionStorage.ID_USUARIO;
 
-            if (data.erro) {
+    if (!fkUsuario) {
+        alert('ID do usuário não está definido!');
+        return;
+    }
+
+    const atualizarGrafico = () => {
+        fetch(`/dash/buscarPesos/${fkUsuario}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar os dados.');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data && data.length > 0) {
+                    console.log('Dados carregados:', data);
+
+                    // Processar os dados do gráfico
+                    const labels = data.map(item => new Date(item.dtRegistro).toLocaleDateString());
+                    const pesos = data.map(item => item.peso);
+
+                    // Preencher o peso-alvo com o último valor válido
+                    let ultimoPesoAlvo = 0;
+                    const pesosAlvo = data.map(item => {
+                        if (item.pesoAlvo != null) {
+                            ultimoPesoAlvo = item.pesoAlvo;
+                        }
+                        return ultimoPesoAlvo;
+                    });
+
+                    // Atualizar ou criar o gráfico
+                    if (window.graficoPeso) {
+                        // Atualizar dados no gráfico existente
+                        window.graficoPeso.data.labels = labels;
+                        window.graficoPeso.data.datasets[0].data = pesos;
+                        window.graficoPeso.data.datasets[1].data = pesosAlvo;
+                        window.graficoPeso.update();
+                    } else {
+                        
+                        const ctx = document.getElementById('pesoChart').getContext('2d');
+                        window.graficoPeso = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: 'Peso Registrado',
+                                        data: pesos,
+                                        backgroundColor: '#42a5f5',
+                                        borderColor: '#1e88e5',
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Peso Alvo',
+                                        data: pesosAlvo,
+                                        type: 'line',
+                                        borderColor: '#ff5252',
+                                        borderWidth: 2,
+                                        tension: 0.4,
+                                        pointRadius: 0,
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'top'
+                                    },
+                                    tooltip: {
+                                        mode: 'index',
+                                        intersect: false
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: 'Data'
+                                        }
+                                    },
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'Peso (kg)'
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Erro ao carregar os dados do gráfico:', error);
+                alert('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
+            });
+    };
+
+    
+    atualizarGrafico();
+
+    
+    setInterval(atualizarGrafico, 1000); 
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    function gerarGraficoFrequenciaPorIdade() {
+        fetch('/dash/frequenciaPorIdade')
+            .then(response => response.json())
+            .then(dados => {
+                const idades = dados.map(item => item.idade);
+                const frequencias = dados.map(item => item['Frequência Média']);
                 
-                console.error('Erro na API:', data.erro);
-                
-                alert('Erro ao buscar dados: ' + data.erro);
-                return;  
-            }
-
-
-            if (data && Array.isArray(data.dados)) {
-
-                const scatterData = data.dados.map(item => ({
-                    x: calcularIdade(item.dtNasc),
-                    y: item.frequenciaSemana
-                }));
-
+                // Criando o gráfico com os dados recebidos
                 const ctx = document.getElementById('idadeFrequenciaChart').getContext('2d');
                 new Chart(ctx, {
-                    type: 'scatter',
+                    type: 'polarArea',
                     data: {
+                        labels: idades,
                         datasets: [{
-                            label: 'Frequência Semanal por Idade',
-                            data: scatterData, 
-                            backgroundColor: '#42a5f5',
-                            borderColor: '#1e88e5'
+                            label: 'Frequência Semanal de Treino (Média)',
+                            data: frequencias,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false,
                         }]
                     },
                     options: {
+                        responsive: true,
                         scales: {
                             x: {
                                 title: {
@@ -153,20 +250,71 @@ document.addEventListener('DOMContentLoaded', () => {
                             y: {
                                 title: {
                                     display: true,
-                                    text: 'Frequência (Dias por Semana)'
+                                    text: 'Frequência Semanal (Dias)'
                                 }
                             }
                         }
                     }
                 });
-            } else {
-                console.error('Estrutura de dados inesperada:', data);
-                alert('Dados recebidos não estão no formato esperado.');
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao buscar dados:', error);
-            alert('Erro ao buscar dados da API. Tente novamente mais tarde.');
-        });
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados de frequência por idade:', error);
+            });
+    }
+
+    // Chama a função para gerar o gráfico ao carregar a página
+    gerarGraficoFrequenciaPorIdade();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+        function gerarGraficoMotivacao() {
+            fetch('/dash/contarMotivacao')
+                .then(response => response.json())
+                .then(dados => {
+                    const motivacoes = dados.map(item => item.motivacao);
+                    const total = dados.map(item => item.total);
+                    
+                    // Criando o gráfico com os dados recebidos
+                    const ctx = document.getElementById('motivacaoChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: motivacoes,
+                            datasets: [{
+                                label: 'Número de Usuários',
+                                data: total,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Motivação'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Quantidade de Usuários'
+                                    },
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados de motivação:', error);
+                });
+        }
+
+        // Chama a função para gerar o gráfico ao carregar a página
+        gerarGraficoMotivacao();
+    });
+
 </script>

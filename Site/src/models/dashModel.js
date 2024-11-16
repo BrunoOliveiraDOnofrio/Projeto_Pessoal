@@ -1,14 +1,47 @@
 var database = require("../database/config");
 
 function registrar(peso, pesoAlvo, fkUsuario) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function Guardar():", dtRegistro, peso, pesoAlvo, fkUsuario);
+    if (pesoAlvo === '') pesoAlvo = 'NULL';
+    return database.executar(`
+        INSERT INTO progresso (dtRegistro, peso, pesoAlvo, fkUsuario) 
+        VALUES (NOW(), ${peso}, ${pesoAlvo}, ${fkUsuario});
+    `);
+}
 
-    var hoje = Date.now();
-    var instrucaoSql = `INSERT INTO progresso (dtRegistro, peso, pesoAlvo, fkUsuario) VALUES ('${hoje}', '${peso}', '${pesoAlvo}', '${fkUsuario}');`;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+function buscarPesos(fkUsuario) {
+    return database.executar(`
+        SELECT 
+            dtRegistro, 
+            peso, 
+            pesoAlvo 
+        FROM progresso 
+        WHERE fkUsuario = ${fkUsuario} 
+        ORDER BY dtRegistro ASC;
+    `);
+}
+
+function frequenciaPorIdade() {
+    return database.executar(`
+        SELECT 
+            YEAR(NOW()) - YEAR(dtNasc) AS idade,
+            TRUNCATE(AVG(frequenciaSemana), 1) AS 'Frequência Média'
+        FROM curiosidade
+        GROUP BY idade
+        ORDER BY idade;
+    `);
+}
+
+function contarMotivacao() {
+    return database.executar(`
+        SELECT motivacao, COUNT(*) AS total
+        FROM curiosidade
+        GROUP BY motivacao;
+    `);
 }
 
 module.exports = {
-    registrar
+    registrar,
+    buscarPesos,
+    frequenciaPorIdade,
+    contarMotivacao
 }
