@@ -23,8 +23,8 @@
           <div class="menu">
             <ul>
               <li>Bem Vindo! <span id="b_usuario"></span>.</li>
-              <li>Sobre Mim</li>
-              <li>Dashboard</li>
+              <a href="../sobremim/sobre.html"><li>Sobre Mim</li></a>
+              <a href="./dash.html"><li>Dashboard</li></a>
             </ul>
           </div>
         </div>
@@ -32,6 +32,15 @@
 
     <div class="info">
         <div class="kpi">
+
+            <div class="kpi-card">
+                <h3>Motivação Mais Popular</h3>
+                <p id="kpiMotivacao">Carregando...</p>
+            </div>
+            <div class="kpi-card">
+                <h3>Idade com Maior Frequência</h3>
+                <p id="kpiFrequencia">Carregando...</p>
+            </div>
 
         </div>
         <div class="progresso">
@@ -53,9 +62,9 @@
         </div>
 
         <div class="dash">
-            <h3>Relação entre Idade e Frequência Semanal de Treinos</h3>
-            <canvas id="idadeFrequenciaChart"></canvas>
-            <h3>Quantidade de Usuários por Motivação</h3>
+            <h3>Média de frequência semanal por idade</h3>
+            <canvas id="idadeFrequenciaChart" width="300px" height="300px"></canvas>
+            <h3>Motivação dos usuários</h3>
             <canvas id="motivacaoChart"></canvas>
         </div>
         
@@ -159,9 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     {
                                         label: 'Peso Registrado',
                                         data: pesos,
-                                        backgroundColor: '#42a5f5',
-                                        borderColor: '#1e88e5',
-                                        borderWidth: 1
+                                        backgroundColor: '#c300ff',
+                                        borderColor: 'white',
+                                        borderWidth: 2
                                     },
                                     {
                                         label: 'Peso Alvo',
@@ -234,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         datasets: [{
                             label: 'Frequência Semanal de Treino (Média)',
                             data: frequencias,
-                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: '#c300ff',
                             fill: false,
                         }]
                     },
@@ -283,9 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             datasets: [{
                                 label: 'Número de Usuários',
                                 data: total,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
+                                backgroundColor: '#c300ff',
+                                borderColor: 'white',
+                                borderWidth: 2
                             }]
                         },
                         options: {
@@ -313,8 +322,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         }
 
-        // Chama a função para gerar o gráfico ao carregar a página
         gerarGraficoMotivacao();
     });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const motivacaoPopularElement = document.getElementById("kpiMotivacao");
+    const idadeFrequenciaElement = document.getElementById("kpiFrequencia");
+
+    // Função para carregar motivação mais popular
+    const carregarMotivacaoPopular = () => {
+        fetch("/dash/kpiMotivacao")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar a motivação mais popular");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                motivacaoPopularElement.textContent = data.motivacao || "Não disponível";
+            })
+            .catch((error) => {
+                console.error("Erro ao carregar motivação popular:", error);
+                motivacaoPopularElement.textContent = "Erro ao carregar";
+            });
+    };
+
+    // Função para carregar idade com maior frequência
+    const carregarIdadeFrequencia = () => {
+        fetch("/dash/kpiFrequencia")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar a idade com maior frequência");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data) {
+                    const idade = data.idade;
+                    const frequenciaMedia = data.frequenciaMedia;
+                    idadeFrequenciaElement.textContent = `${idade} anos (${frequenciaMedia} dias/semana)`;
+                } else {
+                    idadeFrequenciaElement.textContent = "Não disponível";
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao carregar idade com maior frequência:", error);
+                idadeFrequenciaElement.textContent = "Erro ao carregar";
+            });
+    };
+
+    // Carregar as KPIs
+    carregarMotivacaoPopular();
+    carregarIdadeFrequencia();
+});
 
 </script>

@@ -72,9 +72,40 @@ function contarMotivacao(req, res) {
         });
 }
 
+function kpiMotivacao(req, res) {
+    try {
+        const result = dashModel.kpiMotivacao();
+        if (result.length > 0) {
+            res.status(200).json(result[0]); // Retorna a motivação mais popular
+        } else {
+            res.status(404).json({ mensagem: "Nenhuma motivação encontrada." });
+        }
+    } catch (error) {
+        console.error("Erro ao buscar motivação mais popular:", error.sqlMessage);
+        res.status(500).json({ mensagem: "Erro ao buscar motivação mais popular." });
+    }
+}
+
+function kpiFrequencia(req, res) {
+    try {
+        const result = dashModel.kpiFrequencia();
+        if (result.length > 0) {
+            res.status(200).json(result[0]); // Retorna a idade com maior frequência
+        } else {
+            res.status(404).json({ mensagem: "Nenhuma frequência encontrada." });
+        }
+    } catch (error) {
+        console.error("Erro ao buscar idade com maior frequência:", error.sqlMessage);
+        res.status(500).json({ mensagem: "Erro ao buscar idade com maior frequência." });
+    }
+}
+
+
 module.exports = {
     registrar,
     buscarPesos,
     frequenciaPorIdade,
-    contarMotivacao
+    contarMotivacao,
+    kpiMotivacao,
+    kpiFrequencia
 };

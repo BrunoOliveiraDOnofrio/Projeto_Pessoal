@@ -18,4 +18,15 @@ router.get("/frequenciaPorIdade", function (req, res) {
 router.get("/contarMotivacao", function (req, res) {
     dashController.contarMotivacao(req, res);
 });
+
+router.get('/kpiMotivacao', function (req, res){
+    dashController.kpiMotivacao(req, res);
+});
+
+router.get('/kpiFrequencia', function (req, res){
+    dashController.kpiFrequencia(req, res);
+});
+
+
+
 module.exports = router;

@@ -10,6 +10,7 @@
 
 body {
     overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.829);
 }
 
 .container {
@@ -17,6 +18,10 @@ body {
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.397) 0%, rgba(0,0,0,1) 100%);
     z-index: 5;
+}
+
+#b_usuario{
+    color: #c300ff;
 }
 
 .menu {
@@ -61,64 +66,74 @@ body {
 
 .info {
     display: grid;
+    grid-template-columns: 40% 60%;
     grid-template-areas: 
-        "a a b b"
-        "c c b b"
-        "c c b b";
-    gap: 10px;
+        "a b"
+        "c b";
+    gap: 20px;
 }
 
 .kpi {
     grid-area: a;
-    background-color: #c300ff;
+    background-color: #1f1f1f;
     height: 10vw;
 }
-
-.progresso {
-    grid-area: b;
-    background-color: #00ffea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
-    flex-direction: column;
-}
-
-.progresso div {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.progresso input, button{
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-}
-
-#idadeFrequenciaChart {
-    width: 100px;
-}
-
-#pesoChart {
-    width: 100px;
-}
-
-#motivacaoChart {
-    width:  100px;
-}
-
 .dash {
     grid-area: c;
-    width: 50vw;
-    position: relative;
-    left: 60px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    background-color: #1f1f1f; 
+    padding: 20px;
+}
+
+.dash canvas {
+    max-width: 70%; 
+    height: auto; 
 }
 
 .dash h3 {
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.progresso {
+    grid-area: b;
+    background-color: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    padding: 20px;
+}
+
+.progresso div {
+    display: flex;
+    width: 50%;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.progresso canvas {
+    height: 100%;
+}
+
+.progresso input, .progresso button {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 70%; 
+}
+
+div h3 {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(34, 32, 32);
+    cursor: default;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }

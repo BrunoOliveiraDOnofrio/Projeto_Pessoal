@@ -39,9 +39,34 @@ function contarMotivacao() {
     `);
 }
 
+const kpiFrequencia = async () => {
+    const query = `
+        SELECT YEAR(NOW()) - YEAR(dtNasc) AS idade, 
+               TRUNCATE(AVG(frequenciaSemana), 1) AS frequenciaMedia 
+        FROM curiosidade 
+        GROUP BY idade 
+        ORDER BY frequenciaMedia DESC 
+        LIMIT 1
+    `;
+    return database.executar(query);
+};
+
+const kpiMotivacao = async () => {
+    const query = `
+        SELECT motivacao, COUNT(motivacao) AS total 
+        FROM curiosidade 
+        GROUP BY motivacao 
+        ORDER BY total DESC 
+        LIMIT 1
+    `;
+    return database.executar(query);
+};
+
 module.exports = {
     registrar,
     buscarPesos,
     frequenciaPorIdade,
-    contarMotivacao
+    contarMotivacao,
+    kpiFrequencia,
+    kpiMotivacao
 }
