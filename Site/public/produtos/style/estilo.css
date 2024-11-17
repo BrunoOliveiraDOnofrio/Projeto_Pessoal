@@ -169,7 +169,7 @@
     top: 175px;
     transform: translateY(-50%);
     z-index: 4;
-    left: 1250px;
+    left: 1350px;
     transform: rotate(40deg);
 
 }
@@ -207,6 +207,13 @@
     width: 90%;
     font-size: 20px;
     padding: 20px;
+}
+
+.beneficios div h4 {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .yopro{
