@@ -27,6 +27,8 @@ router.get('/kpiFrequencia', function (req, res){
     dashController.kpiFrequencia(req, res);
 });
 
-
+router.get('/kpiAcademia', function (req, res){
+    dashController.kpiAcademia(req, res);
+})
 
 module.exports = router;

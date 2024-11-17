@@ -40,8 +40,7 @@ function contarMotivacao() {
 }
 
 const kpiFrequencia = async () => {
-    try {
-        const dados = await database.executar(`
+        return database.executar(`
             SELECT 
                 YEAR(NOW()) - YEAR(dtNasc) AS idade, 
                 TRUNCATE(AVG(frequenciaSemana), 1) AS frequenciaMedia 
@@ -50,16 +49,11 @@ const kpiFrequencia = async () => {
             ORDER BY frequenciaMedia DESC 
             LIMIT 1
         `);
-        return dados;
-    } catch (erro) {
-        console.error("Erro ao executar a consulta de KPI Frequência:", erro);
-        throw erro;
-    }
+
 };
 
 const kpiMotivacao = async () => {
-    try {
-        const dados = await database.executar(`
+        return database.executar(`
             SELECT 
                 motivacao, 
                 COUNT(motivacao) AS total 
@@ -68,13 +62,21 @@ const kpiMotivacao = async () => {
             ORDER BY total DESC 
             LIMIT 1
         `);
-        return dados;
-    } catch (erro) {
-        console.error("Erro ao executar a consulta de KPI Motivação:", erro);
-        throw erro;
-    }
+
 };
 
+const kpiAcademia = async () => {
+    return database.executar(`
+            SELECT 
+                academia,
+                COUNT(academia) AS total
+            FROM curiosidade
+            GROUP BY academia
+            ORDER BY total DESC
+            LIMIT 1
+        `);
+        
+}
 
 module.exports = {
     registrar,
@@ -82,5 +84,6 @@ module.exports = {
     frequenciaPorIdade,
     contarMotivacao,
     kpiFrequencia,
-    kpiMotivacao
+    kpiMotivacao,
+    kpiAcademia
 }

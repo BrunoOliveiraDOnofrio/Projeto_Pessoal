@@ -75,7 +75,7 @@ function kpiFrequencia(req, res) {
     dashModel.kpiFrequencia()
         .then((dados) => {
             if (dados && dados.length > 0) {
-                res.status(200).json(dados[0]); // Envia apenas o registro com a maior frequência média
+                res.status(200).json(dados[0]);
             } else {
                 res.status(404).json({ mensagem: "Nenhum dado encontrado para KPI de frequência." });
             }
@@ -90,7 +90,7 @@ function kpiMotivacao(req, res) {
     dashModel.kpiMotivacao()
         .then((dados) => {
             if (dados && dados.length > 0) {
-                res.status(200).json(dados[0]); // Envia apenas o registro com maior motivação
+                res.status(200).json(dados[0]);
             } else {
                 res.status(404).json({ mensagem: "Nenhum dado encontrado para KPI de motivação." });
             }
@@ -101,6 +101,21 @@ function kpiMotivacao(req, res) {
         });
 }
 
+function kpiAcademia(req, res) {
+    dashModel.kpiAcademia()
+        .then((dados) => {
+            if(dados && dados.length > 0){
+                res.status(200).json(dados[0]);
+            }else{
+                res.status(400).json({ mensagem: "Erro ao carregar KPI"});
+            }
+        })
+        .catch((erro) => {
+            console.error("Erro ao carregar KPI");
+            res.status(500).json({ erro: erro.sqlMessage || erro.message});
+        });
+}
+
 
 module.exports = {
     registrar,
@@ -108,5 +123,6 @@ module.exports = {
     frequenciaPorIdade,
     contarMotivacao,
     kpiMotivacao,
-    kpiFrequencia
+    kpiFrequencia,
+    kpiAcademia
 };
