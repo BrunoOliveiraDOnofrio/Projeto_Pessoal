@@ -206,7 +206,7 @@ h2{
 
 .box-slider {
     width: 800px;
-    max-width: 180px;
+    max-width: 174px;
     overflow: auto;
     scroll-behavior: smooth;
     transition:  0.5s ease;

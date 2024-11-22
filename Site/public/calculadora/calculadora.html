@@ -278,17 +278,17 @@
         }else if (obj === 'definir'){
           caloriaDiaria = caloriaDiaria - 300;
           proteina = 2.2 * peso;
-          carrboidrato = 3 * peso;
+          carboidrato = 3 * peso;
           gordura = 0.8 * peso;
 
           treino += `Treinamento com pesos (4-5 vezes por semana), 8-15 repetições por série, combinado com 3-4 sessões de cardio.`;
         }
       }
-      caloriaDiaria = caloriaDiaria.toFixed(1);
-      mensagem += `Precisará de: <br> Calorias Diárias : ${caloriaDiaria} G<br>
-      Proteínas : ${proteina} G Diárias<br>
-      Carboidrato : ${carboidrato} G Diárias<br>
-      Gordura : ${gordura} G Diárias<br>
+
+      mensagem += `Precisará de: <br> Calorias Diárias : ${Math.floor(Number(caloriaDiaria + 1700))} G<br>
+      Proteínas : ${Math.floor(proteina)} G Diárias<br>
+      Carboidrato : ${Math.floor(carboidrato)} G Diárias<br>
+      Gordura : ${Math.floor(gordura)} G Diárias<br>
       Sugestão de Treino : ${treino}`
 
       div_mensagem.innerHTML = `<div class="msg">${mensagem}</div>`;
