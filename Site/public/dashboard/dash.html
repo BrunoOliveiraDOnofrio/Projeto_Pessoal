@@ -90,10 +90,128 @@
         window.location.href = "../index.html";
     }
 
+
+    function carregarDadosGrafico() {
+        const fkUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/dash/buscarPesos/${fkUsuario}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erro ao buscar os dados.");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data && data.length > 0) {
+                    console.log("Dados carregados:", data);
+                    atualizarGraficoPeso(data);
+                } else {
+                    console.warn("Nenhum dado encontrado.");
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao carregar os dados do gráfico:", error);
+                alert("Erro ao carregar os dados. Por favor, tente novamente mais tarde.");
+            });
+    }
+
+    function criarGraficoPeso() {
+        const ctx = document.getElementById("pesoChart").getContext("2d");
+        window.graficoPeso = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Peso Registrado",
+                        data: [],
+                        backgroundColor: "#c300ff",
+                        borderColor: "white",
+                        borderWidth: 2,
+                    },
+                    {
+                        label: "Peso Alvo",
+                        data: [],
+                        type: "line",
+                        borderColor: "#ff5252",
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top",
+                    },
+                    tooltip: {
+                        mode: "index",
+                        intersect: false,
+                    },
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Data",
+                        },
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Peso (kg)",
+                        },
+                    },
+                },
+            },
+        });
+    }
+
+    function atualizarGraficoPeso(dados) {
+        const labels = dados.map((item) =>
+            new Date(item.dtRegistro).toLocaleDateString()
+        );
+        const pesos = dados.map((item) => item.peso);
+
+        let ultimoPesoAlvo = 0;
+        const pesosAlvo = dados.map((item) => {
+            if (item.pesoAlvo != null) {
+                ultimoPesoAlvo = item.pesoAlvo;
+            }
+            return ultimoPesoAlvo;
+        });
+
+        if (window.graficoPeso) {
+            window.graficoPeso.data.labels = labels;
+            window.graficoPeso.data.datasets[0].data = pesos;
+            window.graficoPeso.data.datasets[1].data = pesosAlvo;
+            window.graficoPeso.update();
+        } else {
+            console.error("Gráfico não inicializado!");
+        }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const fkUsuario = sessionStorage.ID_USUARIO;
+
+        if (!fkUsuario) {
+            alert("ID do usuário não está definido!");
+            return;
+        }
+
+
+        criarGraficoPeso();
+        carregarDadosGrafico();
+    });
+
+
     function registrar() {
-        var peso = input_peso.value;
-        var pesoAlvo = input_pesoAlvo.value;
-        var fkUsuario = Number(sessionStorage.ID_USUARIO);
+        const peso = input_peso.value;
+        const pesoAlvo = input_pesoAlvo.value;
+        const fkUsuario = Number(sessionStorage.ID_USUARIO);
 
         console.log("Enviando:", { peso, pesoAlvo, fkUsuario });
 
@@ -110,130 +228,21 @@
         })
             .then((resposta) => {
                 if (resposta.ok) {
+                    alert("Registrado");
+                    
+                    carregarDadosGrafico();
                     return resposta.json();
                 } else {
-                    throw "Houve um erro ao tentar guardar os dados";
-                }
-            })
-            .then((data) => {
-                alert(data.mensagem);
-                window.location.reload();
-                if (data.dados) {
-                    atualizarGraficoPeso(data.dados);
+                    throw new Error("Houve um erro ao tentar guardar os dados");
                 }
             })
             .catch((erro) => {
                 console.error(`#ERRO: ${erro}`);
-                alert("Erro ao atualizar gráfico!");
+                alert("Erro ao registrar e atualizar gráfico!");
             });
 
         return false;
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const fkUsuario = sessionStorage.ID_USUARIO;
-
-        if (!fkUsuario) {
-            alert('ID do usuário não está definido!');
-            return;
-        }
-
-        const criarGraficoPeso = () => {
-            const ctx = document.getElementById('pesoChart').getContext('2d');
-            window.graficoPeso = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [],
-                    datasets: [
-                        {
-                            label: 'Peso Registrado',
-                            data: [],
-                            backgroundColor: '#c300ff',
-                            borderColor: 'white',
-                            borderWidth: 2,
-                        },
-                        {
-                            label: 'Peso Alvo',
-                            data: [],
-                            type: 'line',
-                            borderColor: '#ff5252',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            pointRadius: 0,
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
-                        },
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Data',
-                            },
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Peso (kg)',
-                            },
-                        },
-                    },
-                },
-            });
-        };
-
-        const atualizarGraficoPeso = (dados) => {
-            const labels = dados.map((item) => new Date(item.dtRegistro).toLocaleDateString());
-            const pesos = dados.map((item) => item.peso);
-
-            let ultimoPesoAlvo = 0;
-            const pesosAlvo = dados.map((item) => {
-                if (item.pesoAlvo != null) {
-                    ultimoPesoAlvo = item.pesoAlvo;
-                }
-                return ultimoPesoAlvo;
-            });
-
-            window.graficoPeso.data.labels = labels;
-            window.graficoPeso.data.datasets[0].data = pesos;
-            window.graficoPeso.data.datasets[1].data = pesosAlvo;
-            window.graficoPeso.update();
-        };
-
-        const carregarDadosGrafico = () => {
-            fetch(`/dash/buscarPesos/${fkUsuario}`)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao buscar os dados.');
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    if (data && data.length > 0) {
-                        console.log('Dados carregados:', data);
-                        atualizarGraficoPeso(data);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Erro ao carregar os dados do gráfico:', error);
-                    alert('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
-                });
-        };
-
-        criarGraficoPeso(); 
-        carregarDadosGrafico(); 
-
-    });
 
     document.addEventListener('DOMContentLoaded', () => {
         function gerarGraficoFrequenciaPorIdade() {
