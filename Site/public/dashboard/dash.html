@@ -91,7 +91,7 @@
     }
 
 
-    function carregarDadosGrafico() {
+    function atualizarGraficoPeso() {
         const fkUsuario = sessionStorage.ID_USUARIO;
 
         fetch(`/dash/buscarPesos/${fkUsuario}`)
@@ -104,7 +104,7 @@
             .then((data) => {
                 if (data && data.length > 0) {
                     console.log("Dados carregados:", data);
-                    atualizarGraficoPeso(data);
+                    carregarDadosGrafico(data);
                 } else {
                     console.warn("Nenhum dado encontrado.");
                 }
@@ -169,7 +169,7 @@
         });
     }
 
-    function atualizarGraficoPeso(dados) {
+    function carregarDadosGrafico(dados) {
         const labels = dados.map((item) =>
             new Date(item.dtRegistro).toLocaleDateString()
         );
@@ -204,7 +204,7 @@
 
 
         criarGraficoPeso();
-        carregarDadosGrafico();
+        atualizarGraficoPeso();
     });
 
 
@@ -229,8 +229,8 @@
             .then((resposta) => {
                 if (resposta.ok) {
                     alert("Registrado");
-                    
-                    carregarDadosGrafico();
+
+                    atualizarGraficoPeso();
                     return resposta.json();
                 } else {
                     throw new Error("Houve um erro ao tentar guardar os dados");
@@ -244,7 +244,7 @@
         return false;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+
         function gerarGraficoFrequenciaPorIdade() {
             fetch('/dash/frequenciaPorIdade')
                 .then(response => response.json())
@@ -289,9 +289,9 @@
         }
 
         gerarGraficoFrequenciaPorIdade();
-    });
 
-    document.addEventListener('DOMContentLoaded', () => {
+
+
         function gerarGraficoMotivacao() {
             fetch('/dash/contarMotivacao')
                 .then(response => response.json())
@@ -338,15 +338,13 @@
         }
 
         gerarGraficoMotivacao();
-    });
 
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const motivacaoPopularElement = document.getElementById("kpiMotivacao");
-        const idadeFrequenciaElement = document.getElementById("kpiFrequencia");
-        const academiaPopularElement = document.getElementById("kpiAcademia");
 
-        const carregarMotivacaoPopular = () => {
+
+
+        function carregarMotivacaoPopular() {
+            const motivacaoPopularElement = document.getElementById("kpiMotivacao");
             fetch("/dash/kpiMotivacao")
                 .then((response) => {
                     if (!response.ok) {
@@ -361,9 +359,10 @@
                     console.error("Erro ao carregar motivação popular:", error);
                     motivacaoPopularElement.textContent = "Erro ao carregar";
                 });
-        };
+        }
 
-        const carregarIdadeFrequencia = () => {
+        function carregarIdadeFrequencia() {
+            const idadeFrequenciaElement = document.getElementById("kpiFrequencia");
             fetch("/dash/kpiFrequencia")
                 .then((response) => {
                     if (!response.ok) {
@@ -384,13 +383,14 @@
                     console.error("Erro ao carregar idade com maior frequência:", error);
                     idadeFrequenciaElement.textContent = "Erro ao carregar";
                 });
-        };
+        }
 
-        const carregarAcademiaPopular = () => {
+        function carregarAcademiaPopular() {
+            const academiaPopularElement = document.getElementById("kpiAcademia");
             fetch("/dash/kpiAcademia")
                 .then((response) => {
                     if (!response.ok) {
-                        throw new Error("Erro ao buscar a motivação mais popular");
+                        throw new Error("Erro ao buscar a academia mais popular");
                     }
                     return response.json();
                 })
@@ -398,14 +398,14 @@
                     academiaPopularElement.textContent = data.academia || "Não disponível";
                 })
                 .catch((error) => {
-                    console.error("Erro ao carregar motivação popular:", error);
+                    console.error("Erro ao carregar academia popular:", error);
                     academiaPopularElement.textContent = "Erro ao carregar";
                 });
-        };
+        }
 
         carregarMotivacaoPopular();
         carregarIdadeFrequencia();
         carregarAcademiaPopular();
-    });
+
 
 </script>
